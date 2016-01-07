@@ -1,0 +1,17 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - "5.0"
+  - "4.2"
+  - "4.1"
+  - "4.0"
+
+before_script:
+  - npm install
+  - npm install jshint
+
+script:
+  - npm run lint
+  - istanbul cover -x **/lib/** ./node_modules/mocha/bin/_mocha test --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
