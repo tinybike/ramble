@@ -20,7 +20,7 @@ var constants = {
     ]
 };
 
-var TIMEOUT = 48000;
+var TIMEOUT = 84000;
 
 describe("Comments", function () {
     var markets, numMarkets, market, comment, ipfsHash;
