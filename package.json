@@ -1,10 +1,14 @@
 {
   "name": "ramble",
   "version": "0.1.0",
-  "description": "Decentralized comments system, powered by IPFS and Ethereum",
+  "description": "Decentralized comments",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "jshint index.js && jshint test/test.js"
+  },
+  "engines": {
+    "node": ">= 4.2.x"
   },
   "repository": {
     "type": "git",
@@ -31,6 +35,9 @@
     "ethrpc": "^0.4.10",
     "ipfs-api": "^2.10.1",
     "multi-hash": "^0.1.1"
+  },
+  "browser": {
+    "ipfs-api": false
   },
   "devDependencies": {
     "augur.js": "^0.13.3",

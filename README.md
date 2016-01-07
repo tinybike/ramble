@@ -1,6 +1,10 @@
 Ramble
 ======
 
+[![Build Status](https://travis-ci.org/AugurProject/ramble.svg)](https://travis-ci.org/AugurProject/ramble)
+[![Coverage Status](https://coveralls.io/repos/AugurProject/ramble/badge.svg?branch=master&service=github)](https://coveralls.io/github/AugurProject/ramble?branch=master)
+[![npm version](https://badge.fury.io/js/ramble.svg)](http://badge.fury.io/js/ramble)
+
 Basic decentralized comments.  Uses an Ethereum contract for lookups and IPFS for distributed data storage.
 
 Usage

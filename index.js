@@ -102,6 +102,7 @@ module.exports = {
             }
             if (!obj) return self.getComment(ipfsHash, blockNumber, cb, ++tries);
             self.ipfs.pin.add(ipfsHash, function (e, pinned) {
+                if (self.debug) console.log("getComment.pinned:", pinned);
                 if (e) {
                     self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
                     self.ipfs = ipfsAPI(self.remote);
@@ -197,7 +198,7 @@ module.exports = {
     },
 
     // comment: {marketId, message, author}
-    addMarketComment: function (comment, onSent, onSuccess, onFailed, tries) {
+    addMarketComment: function (comment, onSent, onSuccess, onFailed) {
         var self = this;
         var tx = {
             to: this.connector.contracts.comments,
