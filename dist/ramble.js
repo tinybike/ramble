@@ -140,14 +140,19 @@ module.exports = {
         });
     },
 
-    getMarketComments: function (market, cb) {
+    getMarketComments: function (market, options, cb) {
         if (!market || !isFunction(cb)) {
             return errors.PARAMETER_NUMBER_ERROR;
         }
+        if (!cb && isFunction(options)) {
+            cb = options;
+            options = null;
+        }
+        options = options || {};
         var self = this;
         this.getLogs({
-            fromBlock: "0x1",
-            toBlock: "latest",
+            fromBlock: options.fromBlock || "0x1",
+            toBlock: options.toBlock || "latest",
             address: this.connector.contracts.comments,
             topics: ["comment"]
         }, function (logs) {
@@ -156,6 +161,10 @@ module.exports = {
             }
             if (logs.error) return cb(logs);
             if (!logs || !market) return cb(errors.IPFS_GET_FAILURE);
+            var numLogs = logs.length;
+            if (options.numComments && options.numComments < numLogs) {
+                logs = logs.slice(numLogs - options.numComments, numLogs);
+            }
             var comments = [];
             market = abi.bignum(abi.unfork(market));
             async.eachSeries(logs, function (thisLog, nextLog) {
