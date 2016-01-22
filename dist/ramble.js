@@ -62,6 +62,8 @@ module.exports = {
 
     context: rpc,
 
+    rpc: rpc,
+
     constants: constants,
 
     connector: connector,
@@ -126,7 +128,7 @@ module.exports = {
                         message: data.message || ""
                     });
                 }
-                rpc.getBlock(blockNumber, true, function (block) {
+                self.rpc.getBlock(blockNumber, true, function (block) {
                     if (!block || block.error) return cb(block);
                     cb(null, {
                         ipfsHash: ipfsHash,
@@ -141,14 +143,12 @@ module.exports = {
     },
 
     getMarketComments: function (market, options, cb) {
-        if (!market || !isFunction(cb)) {
-            return errors.PARAMETER_NUMBER_ERROR;
-        }
         if (!cb && isFunction(options)) {
             cb = options;
             options = null;
         }
         options = options || {};
+        if (!market || !isFunction(cb)) return errors.PARAMETER_NUMBER_ERROR;
         var self = this;
         this.getLogs({
             fromBlock: options.fromBlock || "0x1",
@@ -250,7 +250,7 @@ module.exports = {
                     abi.unfork(comment.marketId, true),
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
-                rpc.transact(tx, function (res) {
+                self.rpc.transact(tx, function (res) {
                     self.broadcastPin(data, ipfsHash);
                     onSent(res);
                 }, onSuccess, onFailed);

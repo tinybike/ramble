@@ -1,6 +1,6 @@
 {
   "name": "ramble",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "IPFS/Ethereum decentralized comments",
   "main": "index.js",
   "scripts": {
@@ -40,7 +40,7 @@
     "ipfs-api": false
   },
   "devDependencies": {
-    "augur.js": "^0.13.13",
+    "augur.js": "^0.13.14",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
     "coveralls": "^2.11.6",

@@ -23,7 +23,7 @@ var constants = {
 var TIMEOUT = 84000;
 
 describe("Comments", function () {
-    var markets, numMarkets, market, comment, ipfsHash;
+    var markets, numMarkets, market, comment, ipfsHash, ipfsData;
 
     augur.connect("https://eth3.augur.net");
     markets = augur.getMarkets(augur.branches.dev);
@@ -35,6 +35,11 @@ describe("Comments", function () {
 
     comment = {marketId: market, author: comments.connector.from, message: "haters gonna hate"};
     ipfsHash = "QmUTAHurKVErazXoNNLDZi7v4MYduLNSckLvY7zhT1gJaD";
+    ipfsData = comments.ipfs.Buffer(JSON.stringify({
+        "marketId": "-0xd7d2bb0f5302c85649fed3e74391861c673fc53068823e911ff3938e68064d84",
+        "author":"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
+        "message":"haters gonna hate"
+    }));
 
     it("retrieve a comment from its hash", function (done) {
         this.timeout(TIMEOUT);
@@ -68,10 +73,12 @@ describe("Comments", function () {
         this.timeout(TIMEOUT);
         comments.addMarketComment(comment,
             function (res) {
+                // sent
                 assert.property(res, "txHash");
                 assert.strictEqual(res.callReturn, "1");
             },
             function (res) {
+                // success
                 assert.property(res, "txHash");
                 assert.strictEqual(res.callReturn, "1");
                 assert.strictEqual(res.from, comments.connector.from);
@@ -87,7 +94,7 @@ describe("Comments", function () {
 
     it("get comments for market " + market, function (done) {
         this.timeout(TIMEOUT);
-        comments.getMarketComments(market, function (err, comments) {
+        comments.getMarketComments(market, {numComments: 3}, function (err, comments) {
             assert.isNull(err);
             assert.isAbove(comments.length, 0);
             assert.isArray(comments);
@@ -108,7 +115,7 @@ describe("Comments", function () {
         this.timeout(TIMEOUT);
         delete require.cache[require.resolve("../")];
         var comments = require("../");
-        comments.broadcastPin(ipfsHash, function (err, pinningNodes) {
+        comments.broadcastPin(ipfsData, ipfsHash, function (err, pinningNodes) {
             assert.isNull(err);
             assert.isArray(pinningNodes);
             assert.strictEqual(pinningNodes.length, comments.remoteNodes.length);
