@@ -183,22 +183,28 @@ module.exports = {
 
     // pin data to all remote nodes
     // TODO: attach ipfsAPI instances to object for re-use
-    broadcastPin: function (ipfsHash, cb) {
+    broadcastPin: function (data, ipfsHash, cb) {
         var self = this;
         var pinningNodes = [];
         cb = cb || function () {};
-        async.each(this.remoteNodes, function (node, nextNode) {
-            if (self.remote && node.host === self.remote.host) {
-                return nextNode();
-            }
-            ipfsAPI(node).pin.add(ipfsHash, function (err, pinned) {
-                if (err) return nextNode(err);
-                if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
-                if (pinned) {
-                    if (pinned.error) return nextNode(pinned);
-                    pinningNodes.push(node);
+        var ipfsNodes = new Array(NUM_NODES);
+        for (var i = 0; i < NUM_NODES; ++i) {
+            ipfsNodes[i] = ipfsAPI(this.remoteNodes[i]);
+        }
+        async.forEachOfSeries(ipfsNodes, function (node, index, nextNode) {
+            node.add(data, function (err, files) {
+                if (err || !files || files.error) {
+                    return nextNode(err || files);
                 }
-                nextNode();
+                node.pin.add(ipfsHash, function (err, pinned) {
+                    if (err && err.code) return nextNode(err);
+                    if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
+                    if (pinned.error) return nextNode(pinned);
+                    if (pinned.toString().indexOf("504 Gateway Time-out") === -1) {
+                        pinningNodes.push(self.remoteNodes[index]);
+                    }
+                    return nextNode();
+                });
             });
         }, function (err) {
             if (err) return cb(err);
@@ -216,12 +222,10 @@ module.exports = {
             signature: "ii",
             send: true,
             returns: "number",
-            invocation: {
-                invoke: this.invoke,
-                context: this.context
-            }
+            invocation: {invoke: this.invoke, context: this.context}
         };
-        this.ipfs.add(this.ipfs.Buffer(JSON.stringify(comment)), function (err, files) {
+        var data = this.ipfs.Buffer(JSON.stringify(comment));
+        this.ipfs.add(data, function (err, files) {
             if (self.debug) console.log("ipfs.add:", files);
             if (err || !files || files.error) {
                 self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
@@ -239,7 +243,7 @@ module.exports = {
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
                 rpc.transact(tx, function (res) {
-                    self.broadcastPin(ipfsHash);
+                    self.broadcastPin(data, ipfsHash);
                     onSent(res);
                 }, onSuccess, onFailed);
             });

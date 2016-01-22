@@ -191,22 +191,28 @@ module.exports = {
 
     // pin data to all remote nodes
     // TODO: attach ipfsAPI instances to object for re-use
-    broadcastPin: function (ipfsHash, cb) {
+    broadcastPin: function (data, ipfsHash, cb) {
         var self = this;
         var pinningNodes = [];
         cb = cb || function () {};
-        async.each(this.remoteNodes, function (node, nextNode) {
-            if (self.remote && node.host === self.remote.host) {
-                return nextNode();
-            }
-            ipfsAPI(node).pin.add(ipfsHash, function (err, pinned) {
-                if (err) return nextNode(err);
-                if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
-                if (pinned) {
-                    if (pinned.error) return nextNode(pinned);
-                    pinningNodes.push(node);
+        var ipfsNodes = new Array(NUM_NODES);
+        for (var i = 0; i < NUM_NODES; ++i) {
+            ipfsNodes[i] = ipfsAPI(this.remoteNodes[i]);
+        }
+        async.forEachOfSeries(ipfsNodes, function (node, index, nextNode) {
+            node.add(data, function (err, files) {
+                if (err || !files || files.error) {
+                    return nextNode(err || files);
                 }
-                nextNode();
+                node.pin.add(ipfsHash, function (err, pinned) {
+                    if (err && err.code) return nextNode(err);
+                    if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
+                    if (pinned.error) return nextNode(pinned);
+                    if (pinned.toString().indexOf("504 Gateway Time-out") === -1) {
+                        pinningNodes.push(self.remoteNodes[index]);
+                    }
+                    return nextNode();
+                });
             });
         }, function (err) {
             if (err) return cb(err);
@@ -224,12 +230,10 @@ module.exports = {
             signature: "ii",
             send: true,
             returns: "number",
-            invocation: {
-                invoke: this.invoke,
-                context: this.context
-            }
+            invocation: {invoke: this.invoke, context: this.context}
         };
-        this.ipfs.add(this.ipfs.Buffer(JSON.stringify(comment)), function (err, files) {
+        var data = this.ipfs.Buffer(JSON.stringify(comment));
+        this.ipfs.add(data, function (err, files) {
             if (self.debug) console.log("ipfs.add:", files);
             if (err || !files || files.error) {
                 self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
@@ -247,7 +251,7 @@ module.exports = {
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
                 rpc.transact(tx, function (res) {
-                    self.broadcastPin(ipfsHash);
+                    self.broadcastPin(data, ipfsHash);
                     onSent(res);
                 }, onSuccess, onFailed);
             });
@@ -5429,6 +5433,10 @@ module.exports={
         "0": "incorrect hash",
         "-2": "incorrect reporter ID"
     },
+    "createSubbranch": {
+        "-1": "bad input or parent doesn't exist",
+        "-2": "no money for creation fee or branch already exists"
+    },
     "createEvent": {
         "0": "not enough money to pay fees or event already exists",
         "-1": "we're either already past that date, branch doesn't exist, or description is bad"
@@ -6413,6 +6421,7 @@ module.exports = function (network) {
             to: contracts.createBranch,
             method: "createSubbranch",
             signature: "siii",
+            returns: "hash",
             send: true
         },
 
@@ -37118,6 +37127,7 @@ function extend() {
 }
 
 },{}],261:[function(require,module,exports){
+(function (process){
 /**
  * Basic Ethereum connection tasks.
  * @author Jack Peterson (jack@tinybike.net)
@@ -37366,7 +37376,7 @@ module.exports = {
         return this.urlstring(rpc_obj);
     },
 
-    connect: function (rpcinfo, ipcpath, callback) {
+    connect: function (rpcinfo, ipcpath, callback, retry) {
         var localnode, self = this;
         if (!ipcpath && is_function(rpcinfo)) {
             callback = rpcinfo;
@@ -37376,37 +37386,47 @@ module.exports = {
             callback = ipcpath;
             ipcpath = null;
         }
-        if (rpcinfo) {
-            localnode = this.parse_rpcinfo(rpcinfo);
-            if (localnode) {
-                this.rpc.setLocalNode(localnode);
+        if (!retry) {
+            rpcinfo = rpcinfo || process.env.AUGUR_HOST;
+            if (ipcpath) {
                 this.rpc.balancer = false;
+                this.rpc.ipcpath = ipcpath;
+                if (rpcinfo) {
+                    localnode = this.parse_rpcinfo(rpcinfo);
+                    if (localnode) this.rpc.nodes.local = localnode;
+                } else {
+                    this.rpc.nodes.local = "http://127.0.0.1:8545";
+                }
+            } else {
+                this.rpc.ipcpath = null;
+            }
+            if (rpcinfo) {
+                localnode = this.parse_rpcinfo(rpcinfo);
+                if (localnode) {
+                    this.rpc.setLocalNode(localnode);
+                    this.rpc.balancer = false;
+                } else {
+                    this.rpc.useHostedNode();
+                    this.rpc.balancer = true;
+                }
             } else {
                 this.rpc.useHostedNode();
                 this.rpc.balancer = true;
             }
         } else {
+            this.rpc.ipcpath = null;
             this.rpc.useHostedNode();
             this.rpc.balancer = true;
-        }
-        if (ipcpath) {
-            this.rpc.balancer = false;
-            this.rpc.ipcpath = ipcpath;
-            if (rpcinfo) {
-                localnode = this.parse_rpcinfo(rpcinfo);
-                if (localnode) this.rpc.nodes.local = localnode;
-            } else {
-                this.rpc.nodes.local = "http://127.0.0.1:8545";
-            }
-        } else {
-            this.rpc.ipcpath = null;
         }
         if (is_function(callback)) {
             async.series([
                 this.detect_network.bind(this),
                 this.get_coinbase.bind(this)
             ], function (err) {
-                if (err && self.debug) console.error("connect error:", err);
+                if (err) {
+                    if (self.debug) console.error("connect error:", err);
+                    return self.connect(rpcinfo, ipcpath, callback, true);
+                }
                 self.update_contracts();
                 self.connection = true;
                 callback(true);
@@ -37419,9 +37439,8 @@ module.exports = {
                 this.connection = true;
                 return true;
             } catch (exc) {
-                if (this.debug) console.error(exc);
-                this.default_rpc();
-                return this.connect();
+                if (self.debug) console.error("augur.connect:", exc);
+                return this.connect(rpcinfo, ipcpath, callback, true);
             }
         }
     },
@@ -37442,7 +37461,8 @@ module.exports = {
 
 };
 
-},{"async":3,"augur-contracts":9,"ethrpc":262}],262:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"_process":229,"async":3,"augur-contracts":9,"ethrpc":262}],262:[function(require,module,exports){
 (function (process){
 /**
  * JSON RPC methods for Ethereum
