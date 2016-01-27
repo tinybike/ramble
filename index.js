@@ -96,40 +96,108 @@ module.exports = {
         var self = this;
         tries = tries || 0;
         if (tries > NUM_NODES) return cb(errors.IPFS_GET_FAILURE);
-        this.ipfs.object.get(ipfsHash, function (err, obj) {
+        this.ipfs.cat(ipfsHash, function (err, res) {
             if (err) {
                 self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
                 self.ipfs = ipfsAPI(self.remote);
                 return self.getComment(ipfsHash, blockNumber, cb, ++tries);
             }
-            if (!obj) return self.getComment(ipfsHash, blockNumber, cb, ++tries);
+            if (!res) return self.getComment(ipfsHash, blockNumber, cb, ++tries);
             self.ipfs.pin.add(ipfsHash, function (e, pinned) {
+                var comment;
                 if (self.debug) console.log("getComment.pinned:", pinned);
                 if (e) {
                     self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
                     self.ipfs = ipfsAPI(self.remote);
                     return self.getComment(ipfsHash, blockNumber, cb, ++tries);
                 }
-                var data = obj.Data;
-                if (!data) return self.getComment(ipfsHash, blockNumber, cb, ++tries);
-                data = JSON.parse(data.slice(data.indexOf("{"), data.lastIndexOf("}") + 1));
-                if (blockNumber === null || blockNumber === undefined) {
-                    return cb(null, {
-                        ipfsHash: ipfsHash,
-                        author: data.author,
-                        message: data.message || ""
+                if (res.readable) {
+                    comment = "";
+                    res.on("data", function (data) {
+                        comment += data;
+                    });
+                    res.on("end", function () {
+                        comment = JSON.parse(comment.slice(comment.indexOf("{"), comment.lastIndexOf("}") + 1));
+                        if (blockNumber === null || blockNumber === undefined) {
+                            return cb(null, {
+                                ipfsHash: ipfsHash,
+                                author: comment.author,
+                                message: comment.message || ""
+                            });
+                        }
+                        self.rpc.getBlock(blockNumber, true, function (block) {
+                            if (!block || block.error) return cb(block);
+                            cb(null, {
+                                ipfsHash: ipfsHash,
+                                author: comment.author,
+                                message: comment.message || "",
+                                blockNumber: parseInt(blockNumber),
+                                time: parseInt(block.timestamp)
+                            });
+                        });
+                    });
+                } else {
+                    comment = JSON.parse(res.slice(res.indexOf("{"), res.lastIndexOf("}") + 1));
+                    if (blockNumber === null || blockNumber === undefined) {
+                        return cb(null, {
+                            ipfsHash: ipfsHash,
+                            author: comment.author,
+                            message: comment.message || ""
+                        });
+                    }
+                    self.rpc.getBlock(blockNumber, true, function (block) {
+                        if (!block || block.error) return cb(block);
+                        cb(null, {
+                            ipfsHash: ipfsHash,
+                            author: comment.author,
+                            message: comment.message || "",
+                            blockNumber: parseInt(blockNumber),
+                            time: parseInt(block.timestamp)
+                        });
                     });
                 }
-                self.rpc.getBlock(blockNumber, true, function (block) {
-                    if (!block || block.error) return cb(block);
-                    cb(null, {
-                        ipfsHash: ipfsHash,
-                        author: data.author,
-                        message: data.message || "",
-                        blockNumber: parseInt(blockNumber),
-                        time: parseInt(block.timestamp)
+            });
+        });
+    },
+
+    getMetadata: function (ipfsHash, cb, tries) {
+        var self = this;
+        tries = tries || 0;
+        if (tries > NUM_NODES) return cb(errors.IPFS_GET_FAILURE);
+        this.ipfs.cat(ipfsHash, function (err, res) {
+            var metadata;
+            if (err) {
+                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.ipfs = ipfsAPI(self.remote);
+                return self.getMetadata(ipfsHash, cb, ++tries);
+            }
+            if (!res) return self.getMetadata(ipfsHash, cb, ++tries);
+            self.ipfs.pin.add(ipfsHash, function (e, pinned) {
+                if (self.debug) console.log("getMetadata.pinned:", pinned);
+                if (e) {
+                    self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                    self.ipfs = ipfsAPI(self.remote);
+                    return self.getMetadata(ipfsHash, cb, ++tries);
+                }
+                if (res.readable) {
+                    metadata = "";
+                    res.on("data", function (data) {
+                        metadata += data;
                     });
-                });
+                    res.on("end", function () {
+                        metadata = JSON.parse(metadata.slice(metadata.indexOf("{"), metadata.lastIndexOf("}") + 1));
+                        if (metadata.image) {
+                            metadata.image = self.ipfs.Buffer(metadata.image);
+                        }
+                        cb(null, metadata);
+                    });
+                } else {
+                    metadata = JSON.parse(res.slice(res.indexOf("{"), res.lastIndexOf("}") + 1));
+                    if (metadata.image && metadata.image.constructor === Array) {
+                        metadata.image = self.ipfs.Buffer(metadata.image);
+                    }
+                    cb(null, metadata);
+                }
             });
         });
     },
@@ -177,6 +245,52 @@ module.exports = {
                 if (err) return cb(err);
                 comments.reverse();
                 cb(null, comments);
+            });
+        });
+    },
+
+    getMarketMetadata: function (market, options, cb) {
+        if (!cb && isFunction(options)) {
+            cb = options;
+            options = null;
+        }
+        options = options || {};
+        if (!market || !isFunction(cb)) return errors.PARAMETER_NUMBER_ERROR;
+        var self = this;
+        this.getLogs({
+            fromBlock: options.fromBlock || "0x1",
+            toBlock: options.toBlock || "latest",
+            address: this.connector.contracts.comments,
+            topics: ["metadata"]
+        }, function (logs) {
+            if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
+                return cb(errors.IPFS_GET_FAILURE);
+            }
+            if (logs.error) return cb(logs);
+            if (!logs || !market) return cb(errors.IPFS_GET_FAILURE);
+            var numLogs = logs.length;
+            if (options.numComments && options.numComments < numLogs) {
+                logs = logs.slice(numLogs - options.numComments, numLogs);
+            }
+            var metadataList = [];
+            market = abi.bignum(abi.unfork(market));
+            async.eachSeries(logs, function (thisLog, nextLog) {
+                if (!thisLog || !thisLog.topics) return nextLog();
+                if (!abi.bignum(abi.unfork(thisLog.topics[1])).eq(market)) {
+                    return nextLog();
+                }
+                var ipfsHash = multihash.encode(abi.unfork(thisLog.data));
+                self.getMetadata(ipfsHash, function (err, metadata) {
+                    if (err) return nextLog(err);
+                    if (!metadata) return nextLog(errors.IPFS_GET_FAILURE);
+                    if (metadata.error) return nextLog(errors.IPFS_GET_FAILURE);
+                    metadataList.push(metadata);
+                    nextLog();
+                });
+            }, function (err) {
+                if (err) return cb(err);
+                metadataList.reverse();
+                cb(null, metadataList);
             });
         });
     },
@@ -240,6 +354,44 @@ module.exports = {
                 if (err) return onFailed(err);
                 tx.params = [
                     abi.unfork(comment.marketId, true),
+                    abi.hex(multihash.decode(ipfsHash), true)
+                ];
+                self.rpc.transact(tx, function (res) {
+                    self.broadcastPin(data, ipfsHash);
+                    onSent(res);
+                }, onSuccess, onFailed);
+            });
+        });
+    },
+
+    // metadata: {image: blob, details: text, links: url array}
+    addMetadata: function (metadata, onSent, onSuccess, onFailed) {
+        var self = this;
+        var tx = {
+            to: this.connector.contracts.comments,
+            from: this.connector.from,
+            method: "addMetadata",
+            signature: "ii",
+            send: true,
+            returns: "number",
+            invocation: {invoke: this.invoke, context: this.context}
+        };
+        var data = this.ipfs.Buffer(JSON.stringify(metadata));
+        this.ipfs.add(data, function (err, files) {
+            if (self.debug) console.log("ipfs.add:", files);
+            if (err || !files || files.error) {
+                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.ipfs = ipfsAPI(self.remote);
+                return self.addMetadata(metadata, onSent, onSuccess, onFailed);
+            }
+            var ipfsHash = (files.constructor === Array) ? files[0].Hash : files.Hash;
+
+            // pin data to the active node
+            self.ipfs.pin.add(ipfsHash, function (err, pinned) {
+                if (self.debug) console.log("ipfs.pin.add:", pinned);
+                if (err) return onFailed(err);
+                tx.params = [
+                    abi.unfork(metadata.marketId, true),
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
                 self.rpc.transact(tx, function (res) {
