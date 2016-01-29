@@ -22,7 +22,7 @@ var constants = {
     ]
 };
 
-var TIMEOUT = 84000;
+var TIMEOUT = 240000;
 
 describe("Metadata", function () {
 
@@ -35,6 +35,7 @@ describe("Metadata", function () {
         marketId: market,
         image: fs.readFileSync(join(__dirname, "lena.png")),
         details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        tags: ["latin", "lorem ipsum"],
         links: [
             "http://www.lipsum.com/",
             "https://github.com/traviskaufman/node-lipsum"
@@ -74,6 +75,7 @@ describe("Metadata", function () {
             assert.strictEqual(data.image.toString("hex"), metadata.image.toString("hex"));
             assert.strictEqual(data.details, metadata.details);
             assert.deepEqual(data.links, metadata.links);
+            if (data.tags) assert.deepEqual(data.tags, metadata.tags);
             done();
         });
     });
@@ -91,6 +93,7 @@ describe("Metadata", function () {
                 assert.property(metadataList[i], "image");
                 assert.property(metadataList[i], "details");
                 assert.property(metadataList[i], "links");
+                assert.property(metadataList[i], "tags");
             }
 
             done();

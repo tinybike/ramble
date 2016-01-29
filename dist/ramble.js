@@ -1265,7 +1265,10 @@ function isFunction(f) {
 }
 
 var HOSTED_NODES = [
-    "https://eth1.augur.net"
+    "https://eth1.augur.net",
+    "https://eth3.augur.net",
+    "https://eth4.augur.net",
+    "https://eth5.augur.net"
 ];
 
 module.exports = {
@@ -1279,7 +1282,7 @@ module.exports = {
     },
 
     // network load balancer
-    balancer: false,
+    balancer: true,
 
     // remove unresponsive nodes
     excision: false,
@@ -2429,6 +2432,8 @@ module.exports = {
                 return self.checkBlockHash(tx, callreturn, itx, txhash, returns, onSent, onSuccess, onFailed);
             }
             self.txs[txhash].status = "failed";
+            if (self.debug.tx)
+                console.log("raw transactions:", self.rawTxs);
 
             // resubmit if this is a raw transaction and has a duplicate nonce
             if (self.rawTxs[txhash] && self.rawTxs[txhash].tx) {
@@ -39658,7 +39663,9 @@ module.exports = {
                     if (err) return nextLog(err);
                     if (!comment) return nextLog(errors.IPFS_GET_FAILURE);
                     if (comment.error) return nextLog(errors.IPFS_GET_FAILURE);
-                    comments.push(comment);
+                    if (comment.author && comment.message && comment.time) {
+                        comments.push(comment);
+                    }
                     nextLog();
                 });
             }, function (err) {
@@ -39716,7 +39723,6 @@ module.exports = {
     },
 
     // pin data to all remote nodes
-    // TODO: attach ipfsAPI instances to object for re-use
     broadcastPin: function (data, ipfsHash, cb) {
         var self = this;
         var pinningNodes = [];
@@ -39727,14 +39733,14 @@ module.exports = {
         }
         async.forEachOfSeries(ipfsNodes, function (node, index, nextNode) {
             node.add(data, function (err, files) {
-                if (err || !files || files.error) {
+                if ((err && err.code) || !files || files.error) {
                     return nextNode(err || files);
                 }
                 node.pin.add(ipfsHash, function (err, pinned) {
                     if (err && err.code) return nextNode(err);
                     if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
                     if (pinned.error) return nextNode(pinned);
-                    if (pinned.toString().indexOf("504 Gateway Time-out") === -1) {
+                    if (pinned.toString().indexOf("<html>") === -1) {
                         pinningNodes.push(self.remoteNodes[index]);
                     }
                     return nextNode();

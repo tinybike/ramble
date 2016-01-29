@@ -238,7 +238,9 @@ module.exports = {
                     if (err) return nextLog(err);
                     if (!comment) return nextLog(errors.IPFS_GET_FAILURE);
                     if (comment.error) return nextLog(errors.IPFS_GET_FAILURE);
-                    comments.push(comment);
+                    if (comment.author && comment.message && comment.time) {
+                        comments.push(comment);
+                    }
                     nextLog();
                 });
             }, function (err) {
@@ -296,7 +298,6 @@ module.exports = {
     },
 
     // pin data to all remote nodes
-    // TODO: attach ipfsAPI instances to object for re-use
     broadcastPin: function (data, ipfsHash, cb) {
         var self = this;
         var pinningNodes = [];
@@ -307,14 +308,14 @@ module.exports = {
         }
         async.forEachOfSeries(ipfsNodes, function (node, index, nextNode) {
             node.add(data, function (err, files) {
-                if (err || !files || files.error) {
+                if ((err && err.code) || !files || files.error) {
                     return nextNode(err || files);
                 }
                 node.pin.add(ipfsHash, function (err, pinned) {
                     if (err && err.code) return nextNode(err);
                     if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
                     if (pinned.error) return nextNode(pinned);
-                    if (pinned.toString().indexOf("504 Gateway Time-out") === -1) {
+                    if (pinned.toString().indexOf("<html>") === -1) {
                         pinningNodes.push(self.remoteNodes[index]);
                     }
                     return nextNode();
