@@ -10,6 +10,7 @@ var join = require("path").join;
 var assert = require("chai").assert;
 var abi = require("augur-abi");
 var augur = require("augur.js");
+var ipfsAPI = require("ipfs-api");
 var ramble = require("../");
 
 var constants = {
@@ -41,6 +42,17 @@ describe("Metadata", function () {
             "https://github.com/traviskaufman/node-lipsum"
         ]
     };
+    var ipfsHash;
+
+    before(function (done) {
+        this.timeout(TIMEOUT);
+        ramble.remote = ramble.remoteNodes[ramble.remoteNodeIndex];
+        ramble.ipfs = ipfsAPI(ramble.remote);
+        ramble.ipfs.add.call(ramble.ipfs, new Buffer(JSON.stringify(metadata)), function (err, files) {
+            ipfsHash = (files.constructor === Array) ? files[0].Hash : files.Hash;
+            done();
+        });
+    });
 
     it("add metadata to market " + market, function (done) {
         this.timeout(TIMEOUT);
@@ -67,11 +79,10 @@ describe("Metadata", function () {
 
     it("retrieve metadata from its hash", function (done) {
         this.timeout(TIMEOUT);
-        var ipfsHash = "QmXkqkwhnXbQ2jsmj7FpdJJ7vHeuzyxncxxYWuYhzsLNWz";
         ramble.getMetadata(ipfsHash, function (err, data) {
             assert.isNull(err);
             assert.isObject(data);
-            assert.strictEqual(data.marketId, "-0xd428026f3bec9be8b5c08f7bb8f77f464f3a436be51f2dba2790907b1bc36ffc");
+            assert.strictEqual(data.marketId, metadata.marketId);
             assert.strictEqual(data.image.toString("hex"), metadata.image.toString("hex"));
             assert.strictEqual(data.details, metadata.details);
             assert.deepEqual(data.links, metadata.links);
@@ -95,7 +106,6 @@ describe("Metadata", function () {
                 assert.property(metadataList[i], "links");
                 assert.property(metadataList[i], "tags");
             }
-
             done();
         });
     });
