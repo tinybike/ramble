@@ -28,7 +28,7 @@ var TIMEOUT = 240000;
 describe("Metadata", function () {
 
     augur.connect();
-    var markets = augur.getMarkets(augur.branches.dev);
+    var markets = augur.getMarketsInBranch(augur.branches.dev);
     var numMarkets = markets.length;
     var market = markets[numMarkets - 1];
 

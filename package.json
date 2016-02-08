@@ -1,6 +1,6 @@
 {
   "name": "ramble",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Decentralized comments and metadata",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "dependencies": {
     "async": "^1.5.1",
     "augur-abi": "^0.2.7",
-    "augur-contracts": "^0.4.4",
+    "augur-contracts": "^0.4.5",
     "ethereumjs-connect": "^0.1.2",
     "ethrpc": "^0.4.12",
     "ipfs-api": "^2.10.1",
