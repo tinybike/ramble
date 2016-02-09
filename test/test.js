@@ -65,7 +65,7 @@ describe("Metadata", function () {
                 assert.property(successResponse, "txHash");
                 assert.strictEqual(successResponse.callReturn, "1");
                 assert.strictEqual(successResponse.from, ramble.connector.from);
-                assert.strictEqual(successResponse.to, augur.contracts.comments);
+                assert.strictEqual(successResponse.to, augur.contracts.ramble);
                 assert.isAbove(Number(successResponse.blockHash), 0);
                 assert.isAbove(Number(successResponse.blockNumber), 0);
                 assert.strictEqual(Number(successResponse.value), 0);
@@ -171,7 +171,7 @@ describe("Comments", function () {
                 assert.property(res, "txHash");
                 assert.strictEqual(res.callReturn, "1");
                 assert.strictEqual(res.from, ramble.connector.from);
-                assert.strictEqual(res.to, augur.contracts.comments);
+                assert.strictEqual(res.to, augur.contracts.ramble);
                 assert.isAbove(Number(res.blockHash), 0);
                 assert.isAbove(Number(res.blockNumber), 0);
                 assert.strictEqual(Number(res.value), 0);
@@ -247,7 +247,7 @@ describe("Comments", function () {
                 assert.property(res, "txHash");
                 assert.strictEqual(res.callReturn, "1");
                 assert.strictEqual(res.from, ramble.connector.from);
-                assert.strictEqual(res.to, ramble.connector.contracts.comments);
+                assert.strictEqual(res.to, ramble.connector.contracts.ramble);
                 assert.isAbove(Number(res.blockHash), 0);
                 assert.isAbove(Number(res.blockNumber), 0);
                 assert.strictEqual(Number(res.value), 0);
@@ -279,7 +279,7 @@ describe("Comments", function () {
                         assert.property(res, "txHash");
                         assert.strictEqual(res.callReturn, "1");
                         assert.strictEqual(res.from, ramble.connector.from);
-                        assert.strictEqual(res.to, ramble.connector.contracts.comments);
+                        assert.strictEqual(res.to, ramble.connector.contracts.ramble);
                         assert.isAbove(Number(res.blockHash), 0);
                         assert.isAbove(Number(res.blockNumber), 0);
                         assert.strictEqual(Number(res.value), 0);

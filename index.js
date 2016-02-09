@@ -213,7 +213,7 @@ module.exports = {
         this.getLogs({
             fromBlock: options.fromBlock || "0x1",
             toBlock: options.toBlock || "latest",
-            address: this.connector.contracts.comments,
+            address: this.connector.contracts.ramble,
             topics: ["comment"]
         }, function (logs) {
             if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
@@ -262,7 +262,7 @@ module.exports = {
         this.getLogs({
             fromBlock: options.fromBlock || "0x1",
             toBlock: options.toBlock || "latest",
-            address: this.connector.contracts.comments,
+            address: this.connector.contracts.ramble,
             topics: ["metadata"]
         }, function (logs) {
             if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
@@ -331,7 +331,7 @@ module.exports = {
     addMarketComment: function (comment, onSent, onSuccess, onFailed) {
         var self = this;
         var tx = {
-            to: this.connector.contracts.comments,
+            to: this.connector.contracts.ramble,
             from: this.connector.from,
             method: "addComment",
             signature: "ii",
@@ -369,7 +369,7 @@ module.exports = {
     addMetadata: function (metadata, onSent, onSuccess, onFailed) {
         var self = this;
         var tx = {
-            to: this.connector.contracts.comments,
+            to: this.connector.contracts.ramble,
             from: this.connector.from,
             method: "addMetadata",
             signature: "ii",
