@@ -113,9 +113,7 @@ module.exports = {
                 }
                 if (res.readable) {
                     comment = "";
-                    res.on("data", function (data) {
-                        comment += data;
-                    });
+                    res.on("data", function (data) { comment += data; });
                     res.on("end", function () {
                         comment = JSON.parse(comment.slice(comment.indexOf("{"), comment.lastIndexOf("}") + 1));
                         if (blockNumber === null || blockNumber === undefined) {
@@ -181,9 +179,7 @@ module.exports = {
                 }
                 if (res.readable) {
                     metadata = "";
-                    res.on("data", function (data) {
-                        metadata += data;
-                    });
+                    res.on("data", function (data) { metadata += data; });
                     res.on("end", function () {
                         metadata = JSON.parse(metadata.slice(metadata.indexOf("{"), metadata.lastIndexOf("}") + 1));
                         if (metadata.image) {

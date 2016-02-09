@@ -1,7 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
     "7": {
-        "namereg": "0xc6d9d2cd449a754c494264e1809c50e34d64562b",
         "buyAndSellShares": "0xea9cb33592fb7b5c2b730fb4696b108f0ab3b6de",
         "closeMarket": "0x0d7e621a192a10c3333a54ce916bdc8e0244c29d",
         "closeMarketEight": "0xa85e41e0d2efe7d9c3df9ff01ce42cd2182e9a21",
@@ -31,7 +30,6 @@ module.exports={
         "reporting": "0xb707b070a020fdc959496dd9e598d9f03cc2d02f"
     },
     "10101": {
-        "namereg": "0xc6d9d2cd449a754c494264e1809c50e34d64562b",
         "buyAndSellShares": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d",
         "closeMarket": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68",
         "closeMarketEight": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea",
@@ -39792,9 +39790,7 @@ module.exports = {
                 }
                 if (res.readable) {
                     comment = "";
-                    res.on("data", function (data) {
-                        comment += data;
-                    });
+                    res.on("data", function (data) { comment += data; });
                     res.on("end", function () {
                         comment = JSON.parse(comment.slice(comment.indexOf("{"), comment.lastIndexOf("}") + 1));
                         if (blockNumber === null || blockNumber === undefined) {
@@ -39860,9 +39856,7 @@ module.exports = {
                 }
                 if (res.readable) {
                     metadata = "";
-                    res.on("data", function (data) {
-                        metadata += data;
-                    });
+                    res.on("data", function (data) { metadata += data; });
                     res.on("end", function () {
                         metadata = JSON.parse(metadata.slice(metadata.indexOf("{"), metadata.lastIndexOf("}") + 1));
                         if (metadata.image) {

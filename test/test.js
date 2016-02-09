@@ -12,6 +12,7 @@ var abi = require("augur-abi");
 var augur = require("augur.js");
 var ipfsAPI = require("ipfs-api");
 var ramble = require("../");
+var DEBUG = true;
 
 var constants = {
     IPFS_LOCAL: {host: "localhost", port: "5001", protocol: "http"},
@@ -49,6 +50,7 @@ describe("Metadata", function () {
         ramble.remote = ramble.remoteNodes[ramble.remoteNodeIndex];
         ramble.ipfs = ipfsAPI(ramble.remote);
         ramble.ipfs.add.call(ramble.ipfs, new Buffer(JSON.stringify(metadata)), function (err, files) {
+            if (DEBUG) console.log("ramble.ipfs.add:", err, files);
             ipfsHash = (files.constructor === Array) ? files[0].Hash : files.Hash;
             done();
         });
@@ -58,10 +60,12 @@ describe("Metadata", function () {
         this.timeout(TIMEOUT);
         ramble.addMetadata(metadata,
             function (sentResponse) {
+                if (DEBUG) console.log("sent:", sentResponse);
                 assert.property(sentResponse, "txHash");
                 assert.strictEqual(sentResponse.callReturn, "1");
             },
             function (successResponse) {
+                if (DEBUG) console.log("success:", successResponse);
                 assert.property(successResponse, "txHash");
                 assert.strictEqual(successResponse.callReturn, "1");
                 assert.strictEqual(successResponse.from, ramble.connector.from);
@@ -79,6 +83,7 @@ describe("Metadata", function () {
 
     it("retrieve metadata from its hash", function (done) {
         this.timeout(TIMEOUT);
+        if (DEBUG) console.log("ipfsHash:", ipfsHash);
         ramble.getMetadata(ipfsHash, function (err, data) {
             assert.isNull(err);
             assert.isObject(data);
@@ -98,8 +103,9 @@ describe("Metadata", function () {
             assert.isAbove(metadataList.length, 0);
             assert.isArray(metadataList);
             for (var i = 0, len = metadataList.length; i < len; ++i) {
+                console.log(i, metadataList[i]);
                 assert.isObject(metadataList[i]);
-                if (metadataList[i].author) continue;
+                if (metadataList[i].author || !metadataList[i].details) continue;
                 assert.property(metadataList[i], "marketId");
                 assert.property(metadataList[i], "image");
                 assert.property(metadataList[i], "details");
