@@ -30,33 +30,33 @@ module.exports={
         "reporting": "0xb707b070a020fdc959496dd9e598d9f03cc2d02f"
     },
     "10101": {
-        "buyAndSellShares": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d",
-        "closeMarket": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68",
-        "closeMarketEight": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea",
-        "closeMarketFour": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3",
-        "closeMarketOne": "0x35152caa07026203a1add680771afb690d872d7d",
-        "closeMarketTwo": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645",
-        "consensus": "0x8c19616de17acdfbc933b99d9f529a689d22098f",
-        "createBranch": "0x9308cf21b5a11f182f9707ca284bbb71bb84f893",
-        "createEvent": "0xabe47f122a496a732d6c4b38b3ca376d597d75dd",
-        "createMarket": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df",
-        "eventResolution": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79",
-        "faucets": "0xc21cfa6688dbfd2eca2548d894aa55fd0bbf1c7e",
+        "buyAndSellShares": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3",
+        "closeMarket": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79",
+        "closeMarketEight": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d",
+        "closeMarketFour": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645",
+        "closeMarketOne": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7",
+        "closeMarketTwo": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7",
+        "consensus": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df",
+        "createBranch": "0x70a893eb9569041e97a3787f0c76a1eb6378d8b2",
+        "createEvent": "0x81a7621e9a286d061b3dea040888a51c96693b1c",
+        "createMarket": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68",
+        "eventResolution": "0x3f3276849a878a176b2f02dd48a483e8182a49e4",
+        "faucets": "0x5069d883e31429c6dd1325d961f443007747c7a2",
         "insertionsort": "0x8f2c2267687cb0f047b28a1b6f945da6e101a0d7",
-        "makeReports": "0x3f3276849a878a176b2f02dd48a483e8182a49e4",
+        "makeReports": "0x35152caa07026203a1add680771afb690d872d7d",
         "orderBook": "0x708fdfe18bf28afe861a69e95419d183ace003eb",
         "quicksort": "0xa34c9f6fc047cea795f69b34a063d32e6cb6288c",
         "ramble": "0x8a4e2993a9972ee035453bb5674816fc3a698718",
-        "sendReputation": "0x70a893eb9569041e97a3787f0c76a1eb6378d8b2",
-        "transferShares": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7",
-        "branches": "0xe4714fcbdcdba49629bc408183ef40d120700b8d",
-        "cash": "0x482c57abdce592b39434e3f619ffc3db62ab6d01",
-        "events": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667",
-        "expiringEvents": "0x77c424f86a1b80f1e303d1c2651acd6aba653cb6",
-        "fxpFunctions": "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55",
-        "info": "0x81a7621e9a286d061b3dea040888a51c96693b1c",
-        "markets": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7",
-        "reporting": "0x5069d883e31429c6dd1325d961f443007747c7a2"
+        "sendReputation": "0x8c19616de17acdfbc933b99d9f529a689d22098f",
+        "transferShares": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea",
+        "branches": "0x482c57abdce592b39434e3f619ffc3db62ab6d01",
+        "cash": "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55",
+        "events": "0xe4714fcbdcdba49629bc408183ef40d120700b8d",
+        "expiringEvents": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667",
+        "fxpFunctions": "0x0fbddb6bfb81c8d0965a894567cf4061446072c2",
+        "info": "0xc21cfa6688dbfd2eca2548d894aa55fd0bbf1c7e",
+        "markets": "0xabe47f122a496a732d6c4b38b3ca376d597d75dd",
+        "reporting": "0x77c424f86a1b80f1e303d1c2651acd6aba653cb6"
     },
     "errors": {
         "0x": "no response or bad input",
@@ -810,6 +810,13 @@ module.exports = function (network) {
             signature: "i",
             returns: "number"
         },
+        setOutcome: {
+            to: contracts.events,
+            method: "setOutcome",
+            signature: "ii",
+            returns: "number",
+            send: true
+        },
 
         // expiringEvents.se
         getEventIndex: {
@@ -1379,6 +1386,13 @@ module.exports = function (network) {
             to: contracts.makeReports,
             method: "submitReportHash",
             signature: "iiiii",
+            returns: "number",
+            send: true
+        },
+        submitReport: {
+            to: contracts.makeReports,
+            method: "submitReport",
+            signature: "iiiiiii",
             returns: "number",
             send: true
         },
@@ -3921,6 +3935,22 @@ module.exports = {
     },
     getCode: function (address, block, f) {
         return this.broadcast(this.marshal("getCode", [address, block || "latest"]), f);
+    },
+
+    // Fast-forward a specified number of blocks
+    fastforward: function (blocks, callback) {
+        var startBlock, endBlock, self = this;
+        (function fastforward() {
+            self.blockNumber(function (blockNumber) {
+                blockNumber = parseInt(blockNumber);
+                if (startBlock === undefined) {
+                    startBlock = blockNumber;
+                    endBlock = blockNumber + parseInt(blocks);
+                }
+                if (blockNumber >= endBlock) return callback(endBlock);
+                setTimeout(fastforward, 500);
+            });
+        })();
     },
 
     // Ethereum node status checks
@@ -39706,7 +39736,7 @@ function isFunction(f) {
 var constants = {
     IPFS_LOCAL: {host: "localhost", port: "5001", protocol: "http"},
     IPFS_REMOTE: [
-        {host: "ipfs1.augur.net", port: "443", protocol: "https"},
+        //{host: "ipfs1.augur.net", port: "443", protocol: "https"},
         {host: "ipfs2.augur.net", port: "443", protocol: "https"},
         {host: "ipfs4.augur.net", port: "443", protocol: "https"},
         {host: "ipfs5.augur.net", port: "443", protocol: "https"}
@@ -39775,7 +39805,7 @@ module.exports = {
         if (tries > NUM_NODES) return cb(errors.IPFS_GET_FAILURE);
         this.ipfs.cat(ipfsHash, function (err, res) {
             if (err) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                 self.ipfs = ipfsAPI(self.remote);
                 return self.getComment(ipfsHash, blockNumber, cb, ++tries);
             }
@@ -39784,7 +39814,7 @@ module.exports = {
                 var comment;
                 if (self.debug) console.log("getComment.pinned:", pinned);
                 if (e) {
-                    self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                    self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                     self.ipfs = ipfsAPI(self.remote);
                     return self.getComment(ipfsHash, blockNumber, cb, ++tries);
                 }
@@ -39842,7 +39872,7 @@ module.exports = {
         this.ipfs.cat(ipfsHash, function (err, res) {
             var metadata;
             if (err) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                 self.ipfs = ipfsAPI(self.remote);
                 return self.getMetadata(ipfsHash, cb, ++tries);
             }
@@ -39850,7 +39880,7 @@ module.exports = {
             self.ipfs.pin.add(ipfsHash, function (e, pinned) {
                 if (self.debug) console.log("getMetadata.pinned:", pinned);
                 if (e) {
-                    self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                    self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                     self.ipfs = ipfsAPI(self.remote);
                     return self.getMetadata(ipfsHash, cb, ++tries);
                 }
@@ -39973,18 +40003,25 @@ module.exports = {
     // pin data to all remote nodes
     broadcastPin: function (data, ipfsHash, cb) {
         var self = this;
+        var loop = (this.debug) ? async.forEachOfSeries : async.forEachOf;
         var pinningNodes = [];
         cb = cb || function () {};
         var ipfsNodes = new Array(NUM_NODES);
         for (var i = 0; i < NUM_NODES; ++i) {
+            console.log(this.remoteNodes[i]);
             ipfsNodes[i] = ipfsAPI(this.remoteNodes[i]);
         }
-        async.forEachOfSeries(ipfsNodes, function (node, index, nextNode) {
+        loop(ipfsNodes, function (node, index, nextNode) {
+            if (self.debug) {
+                console.log("remote node:", self.remoteNodes[index].host);
+            }
             node.add(data, function (err, files) {
+                if (self.debug) console.log("ipfs.add:", files);
                 if ((err && err.code) || !files || files.error) {
                     return nextNode(err || files);
                 }
                 node.pin.add(ipfsHash, function (err, pinned) {
+                    if (self.debug) console.log("ipfs.pin.add:", pinned);
                     if (err && err.code) return nextNode(err);
                     if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
                     if (pinned.error) return nextNode(pinned);
@@ -40012,11 +40049,18 @@ module.exports = {
             returns: "number",
             invocation: {invoke: this.invoke, context: this.context}
         };
+        var broadcast = comment.broadcast;
+        if (broadcast) delete comment.broadcast;
         var data = this.ipfs.Buffer(JSON.stringify(comment));
         this.ipfs.add(data, function (err, files) {
             if (self.debug) console.log("ipfs.add:", files);
             if (err || !files || files.error) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[(self.remoteNodeIndex++) % NUM_NODES];
+                if (self.debug) {
+                    console.log("connecting to remote node",
+                        self.remoteNodeIndex % NUM_NODES,
+                        self.remote);
+                }
                 self.ipfs = ipfsAPI(self.remote);
                 return self.addMarketComment(comment, onSent, onSuccess, onFailed);
             }
@@ -40031,14 +40075,14 @@ module.exports = {
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
                 self.rpc.transact(tx, function (res) {
-                    self.broadcastPin(data, ipfsHash);
+                    if (broadcast) self.broadcastPin(data, ipfsHash);
                     onSent(res);
                 }, onSuccess, onFailed);
             });
         });
     },
 
-    // metadata: {image: blob, details: text, links: url array}
+    // metadata: {image: blob, details: text, links: url array, source: text}
     addMetadata: function (metadata, onSent, onSuccess, onFailed) {
         var self = this;
         var tx = {
@@ -40050,11 +40094,13 @@ module.exports = {
             returns: "number",
             invocation: {invoke: this.invoke, context: this.context}
         };
+        var broadcast = metadata.broadcast;
+        if (broadcast) delete metadata.broadcast;
         var data = this.ipfs.Buffer(JSON.stringify(metadata));
         this.ipfs.add(data, function (err, files) {
             if (self.debug) console.log("ipfs.add:", files);
             if (err || !files || files.error) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                 self.ipfs = ipfsAPI(self.remote);
                 return self.addMetadata(metadata, onSent, onSuccess, onFailed);
             }
@@ -40069,7 +40115,7 @@ module.exports = {
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
                 self.rpc.transact(tx, function (res) {
-                    self.broadcastPin(data, ipfsHash);
+                    if (broadcast) self.broadcastPin(data, ipfsHash);
                     onSent(res);
                 }, onSuccess, onFailed);
             });

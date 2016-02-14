@@ -13,16 +13,7 @@ var augur = require("augur.js");
 var ipfsAPI = require("ipfs-api");
 var ramble = require("../");
 var DEBUG = true;
-
-var constants = {
-    IPFS_LOCAL: {host: "localhost", port: "5001", protocol: "http"},
-    IPFS_REMOTE: [
-        {host: "ipfs1.augur.net", port: "443", protocol: "https"},
-        {host: "ipfs2.augur.net", port: "443", protocol: "https"},
-        {host: "ipfs4.augur.net", port: "443", protocol: "https"},
-        {host: "ipfs5.augur.net", port: "443", protocol: "https"}
-    ]
-};
+ramble.debug = DEBUG;
 
 var TIMEOUT = 240000;
 
@@ -38,6 +29,7 @@ describe("Metadata", function () {
         image: fs.readFileSync(join(__dirname, "lena.png")),
         details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         tags: ["latin", "lorem ipsum"],
+        source: "Reality Keys",
         links: [
             "http://www.lipsum.com/",
             "https://github.com/traviskaufman/node-lipsum"
@@ -128,7 +120,12 @@ describe("Comments", function () {
         markets = markets.slice(numMarkets - 10, numMarkets - 1);
     }
 
-    comment = {marketId: market, author: ramble.connector.from, message: "haters gonna hate"};
+    comment = {
+        marketId: market,
+        author: ramble.connector.from,
+        message: "haters gonna hate",
+        broadcast: false
+    };
     ipfsHash = "QmUTAHurKVErazXoNNLDZi7v4MYduLNSckLvY7zhT1gJaD";
     ipfsData = ramble.ipfs.Buffer(JSON.stringify({
         "marketId": "-0xd7d2bb0f5302c85649fed3e74391861c673fc53068823e911ff3938e68064d84",
@@ -210,6 +207,7 @@ describe("Comments", function () {
         this.timeout(TIMEOUT);
         delete require.cache[require.resolve("../")];
         var ramble = require("../");
+        ramble.debug = DEBUG;
         ramble.broadcastPin(ipfsData, ipfsHash, function (err, pinningNodes) {
             assert.isNull(err);
             assert.isArray(pinningNodes);
@@ -224,14 +222,17 @@ describe("Comments", function () {
         this.timeout(TIMEOUT*4);
         delete require.cache[require.resolve("../")];
         ramble = require("../");
+        ramble.debug = DEBUG;
         var badHost = "sfpi.rugua.net";
 
         // insert bad node manually into remoteNodes array
+        var NUM_NODES = 3;
         var com = abi.copy(comment);
+        com.broadcast = true;
         com.message = "players gonna play";
         assert.strictEqual(ramble.remoteNodeIndex, 0);
         assert.isArray(ramble.remoteNodes);
-        assert.strictEqual(ramble.remoteNodes.length, 4);
+        assert.strictEqual(ramble.remoteNodes.length, NUM_NODES);
         assert.deepEqual(ramble.remoteNodes, ramble.constants.IPFS_REMOTE);
         ramble.remoteNodes[0].host = badHost;
         ramble.remote = ramble.remoteNodes[0].host;
@@ -240,11 +241,11 @@ describe("Comments", function () {
         assert.isNotNull(ramble.remote);
         assert.strictEqual(ramble.remoteNodes[ramble.remoteNodeIndex].host, badHost);
         assert.strictEqual(ramble.remote.host, badHost);
-        assert.strictEqual(ramble.remoteNodes.length, 4);
+        assert.strictEqual(ramble.remoteNodes.length, NUM_NODES);
         ramble.addMarketComment(com,
             function (res) {
                 assert.isNotNull(ramble.remote);
-                assert.strictEqual(ramble.remoteNodeIndex, 1);
+                assert.strictEqual(ramble.remoteNodeIndex, 2);
                 assert.deepEqual(ramble.remote, ramble.remoteNodes[1]);
                 assert.property(res, "txHash");
                 assert.strictEqual(res.callReturn, "1");
@@ -270,13 +271,13 @@ describe("Comments", function () {
                 assert.isNotNull(ramble.remote);
                 assert.strictEqual(ramble.remoteNodes[ramble.remoteNodeIndex].host, badHost);
                 assert.strictEqual(ramble.remote.host, badHost);
-                assert.strictEqual(ramble.remoteNodes.length, 5);
-                assert.strictEqual(ramble.remoteNodeIndex, 4);
+                assert.strictEqual(ramble.remoteNodes.length, NUM_NODES + 1);
+                assert.strictEqual(ramble.remoteNodeIndex, NUM_NODES);
                 com.message = "breakers gonna break";
                 ramble.addMarketComment(com,
                     function (res) {
                         assert.isNotNull(ramble.remote);
-                        assert.strictEqual(ramble.remoteNodeIndex, 6);
+                        assert.strictEqual(ramble.remoteNodeIndex, NUM_NODES + 3);
                         assert.deepEqual(ramble.remote, ramble.remoteNodes[1]);
                         assert.property(res, "txHash");
                         assert.strictEqual(res.callReturn, "1");
@@ -292,13 +293,13 @@ describe("Comments", function () {
 
                         // revert to local IPFS node
                         assert.deepEqual(
-                            ramble.useLocalNode(constants.IPFS_LOCAL),
-                            constants.IPFS_LOCAL
+                            ramble.useLocalNode(ramble.constants.IPFS_LOCAL),
+                            ramble.constants.IPFS_LOCAL
                         );
                         assert.isNotNull(ramble.localNode);
                         assert.isNull(ramble.remote);
-                        assert.deepEqual(ramble.localNode, constants.IPFS_LOCAL);
-                        assert.strictEqual(ramble.remoteNodeIndex, 6); // unchanged
+                        assert.deepEqual(ramble.localNode, ramble.constants.IPFS_LOCAL);
+                        assert.strictEqual(ramble.remoteNodeIndex, NUM_NODES + 3); // unchanged
                         done();
                     },
                     done

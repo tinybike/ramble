@@ -29,7 +29,7 @@ function isFunction(f) {
 var constants = {
     IPFS_LOCAL: {host: "localhost", port: "5001", protocol: "http"},
     IPFS_REMOTE: [
-        {host: "ipfs1.augur.net", port: "443", protocol: "https"},
+        //{host: "ipfs1.augur.net", port: "443", protocol: "https"},
         {host: "ipfs2.augur.net", port: "443", protocol: "https"},
         {host: "ipfs4.augur.net", port: "443", protocol: "https"},
         {host: "ipfs5.augur.net", port: "443", protocol: "https"}
@@ -98,7 +98,7 @@ module.exports = {
         if (tries > NUM_NODES) return cb(errors.IPFS_GET_FAILURE);
         this.ipfs.cat(ipfsHash, function (err, res) {
             if (err) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                 self.ipfs = ipfsAPI(self.remote);
                 return self.getComment(ipfsHash, blockNumber, cb, ++tries);
             }
@@ -107,7 +107,7 @@ module.exports = {
                 var comment;
                 if (self.debug) console.log("getComment.pinned:", pinned);
                 if (e) {
-                    self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                    self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                     self.ipfs = ipfsAPI(self.remote);
                     return self.getComment(ipfsHash, blockNumber, cb, ++tries);
                 }
@@ -165,7 +165,7 @@ module.exports = {
         this.ipfs.cat(ipfsHash, function (err, res) {
             var metadata;
             if (err) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                 self.ipfs = ipfsAPI(self.remote);
                 return self.getMetadata(ipfsHash, cb, ++tries);
             }
@@ -173,7 +173,7 @@ module.exports = {
             self.ipfs.pin.add(ipfsHash, function (e, pinned) {
                 if (self.debug) console.log("getMetadata.pinned:", pinned);
                 if (e) {
-                    self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                    self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                     self.ipfs = ipfsAPI(self.remote);
                     return self.getMetadata(ipfsHash, cb, ++tries);
                 }
@@ -296,18 +296,25 @@ module.exports = {
     // pin data to all remote nodes
     broadcastPin: function (data, ipfsHash, cb) {
         var self = this;
+        var loop = (this.debug) ? async.forEachOfSeries : async.forEachOf;
         var pinningNodes = [];
         cb = cb || function () {};
         var ipfsNodes = new Array(NUM_NODES);
         for (var i = 0; i < NUM_NODES; ++i) {
+            console.log(this.remoteNodes[i]);
             ipfsNodes[i] = ipfsAPI(this.remoteNodes[i]);
         }
-        async.forEachOfSeries(ipfsNodes, function (node, index, nextNode) {
+        loop(ipfsNodes, function (node, index, nextNode) {
+            if (self.debug) {
+                console.log("remote node:", self.remoteNodes[index].host);
+            }
             node.add(data, function (err, files) {
+                if (self.debug) console.log("ipfs.add:", files);
                 if ((err && err.code) || !files || files.error) {
                     return nextNode(err || files);
                 }
                 node.pin.add(ipfsHash, function (err, pinned) {
+                    if (self.debug) console.log("ipfs.pin.add:", pinned);
                     if (err && err.code) return nextNode(err);
                     if (!pinned) return nextNode(errors.IPFS_ADD_FAILURE);
                     if (pinned.error) return nextNode(pinned);
@@ -335,11 +342,18 @@ module.exports = {
             returns: "number",
             invocation: {invoke: this.invoke, context: this.context}
         };
+        var broadcast = comment.broadcast;
+        if (broadcast) delete comment.broadcast;
         var data = this.ipfs.Buffer(JSON.stringify(comment));
         this.ipfs.add(data, function (err, files) {
             if (self.debug) console.log("ipfs.add:", files);
             if (err || !files || files.error) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[(self.remoteNodeIndex++) % NUM_NODES];
+                if (self.debug) {
+                    console.log("connecting to remote node",
+                        self.remoteNodeIndex % NUM_NODES,
+                        self.remote);
+                }
                 self.ipfs = ipfsAPI(self.remote);
                 return self.addMarketComment(comment, onSent, onSuccess, onFailed);
             }
@@ -354,14 +368,14 @@ module.exports = {
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
                 self.rpc.transact(tx, function (res) {
-                    self.broadcastPin(data, ipfsHash);
+                    if (broadcast) self.broadcastPin(data, ipfsHash);
                     onSent(res);
                 }, onSuccess, onFailed);
             });
         });
     },
 
-    // metadata: {image: blob, details: text, links: url array}
+    // metadata: {image: blob, details: text, links: url array, source: text}
     addMetadata: function (metadata, onSent, onSuccess, onFailed) {
         var self = this;
         var tx = {
@@ -373,11 +387,13 @@ module.exports = {
             returns: "number",
             invocation: {invoke: this.invoke, context: this.context}
         };
+        var broadcast = metadata.broadcast;
+        if (broadcast) delete metadata.broadcast;
         var data = this.ipfs.Buffer(JSON.stringify(metadata));
         this.ipfs.add(data, function (err, files) {
             if (self.debug) console.log("ipfs.add:", files);
             if (err || !files || files.error) {
-                self.remote = self.remoteNodes[++self.remoteNodeIndex % NUM_NODES];
+                self.remote = self.remoteNodes[self.remoteNodeIndex++ % NUM_NODES];
                 self.ipfs = ipfsAPI(self.remote);
                 return self.addMetadata(metadata, onSent, onSuccess, onFailed);
             }
@@ -392,7 +408,7 @@ module.exports = {
                     abi.hex(multihash.decode(ipfsHash), true)
                 ];
                 self.rpc.transact(tx, function (res) {
-                    self.broadcastPin(data, ipfsHash);
+                    if (broadcast) self.broadcastPin(data, ipfsHash);
                     onSent(res);
                 }, onSuccess, onFailed);
             });
