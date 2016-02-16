@@ -39921,6 +39921,7 @@ module.exports = {
         options = options || {};
         if (!market || !isFunction(cb)) return errors.PARAMETER_NUMBER_ERROR;
         var self = this;
+        var loop = (this.debug) ? async.eachSeries : async.each;
         if (this.ipfs) {
             this.getLogs({
                 fromBlock: options.fromBlock || "0x1",
@@ -39939,7 +39940,7 @@ module.exports = {
                 }
                 var comments = [];
                 market = abi.bignum(abi.unfork(market));
-                async.eachSeries(logs, function (thisLog, nextLog) {
+                loop(logs, function (thisLog, nextLog) {
                     if (!thisLog || !thisLog.topics) return nextLog();
                     if (!abi.bignum(abi.unfork(thisLog.topics[1])).eq(market)) {
                         return nextLog();
@@ -39974,6 +39975,7 @@ module.exports = {
         options = options || {};
         if (!market || !isFunction(cb)) return errors.PARAMETER_NUMBER_ERROR;
         var self = this;
+        var loop = (this.debug) ? async.eachSeries : async.each;
         if (this.ipfs) {
             this.getLogs({
                 fromBlock: options.fromBlock || "0x1",
@@ -39990,9 +39992,8 @@ module.exports = {
                 if (options.numComments && options.numComments < numLogs) {
                     logs = logs.slice(numLogs - options.numComments, numLogs);
                 }
-                var metadataList = [];
                 market = abi.bignum(abi.unfork(market));
-                async.eachSeries(logs, function (thisLog, nextLog) {
+                loop(logs, function (thisLog, nextLog) {
                     if (!thisLog || !thisLog.topics) return nextLog();
                     if (!abi.bignum(abi.unfork(thisLog.topics[1])).eq(market)) {
                         return nextLog();
@@ -40003,14 +40004,14 @@ module.exports = {
                         if (!metadata) return nextLog(errors.IPFS_GET_FAILURE);
                         if (metadata.error) return nextLog(errors.IPFS_GET_FAILURE);
                         if (options.sourceless || metadata.source) {
-                            metadataList.push(metadata);
+                            return nextLog({metadata: metadata});
                         }
                         nextLog();
                     });
-                }, function (err) {
-                    if (err) return cb(err);
-                    metadataList.reverse();
-                    cb(null, metadataList);
+                }, function (res) {
+                    if (!res) return cb(errors.IPFS_GET_FAILURE);
+                    if (!res.metadata) return cb(res);
+                    cb(null, res.metadata);
                 });
             });
         }

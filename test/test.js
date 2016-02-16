@@ -12,7 +12,7 @@ var abi = require("augur-abi");
 var augur = require("augur.js");
 var ipfsAPI = require("ipfs-api");
 var ramble = require("../");
-var DEBUG = true;
+var DEBUG = false;
 ramble.debug = DEBUG;
 
 var TIMEOUT = 240000;
@@ -83,27 +83,29 @@ describe("Metadata", function () {
             assert.strictEqual(data.image.toString("hex"), metadata.image.toString("hex"));
             assert.strictEqual(data.details, metadata.details);
             assert.deepEqual(data.links, metadata.links);
-            if (data.tags) assert.deepEqual(data.tags, metadata.tags);
+            assert.deepEqual(data.tags, metadata.tags);
             done();
         });
     });
 
     it("get metadata for market " + market, function (done) {
         this.timeout(TIMEOUT);
-        ramble.getMarketMetadata(market, null, function (err, metadataList) {
+        ramble.getMarketMetadata(market, null, function (err, marketMetadata) {
+            if (DEBUG) console.log(marketMetadata);
             assert.isNull(err);
-            assert.isAbove(metadataList.length, 0);
-            assert.isArray(metadataList);
-            for (var i = 0, len = metadataList.length; i < len; ++i) {
-                console.log(i, metadataList[i]);
-                assert.isObject(metadataList[i]);
-                if (metadataList[i].author || !metadataList[i].details) continue;
-                assert.property(metadataList[i], "marketId");
-                assert.property(metadataList[i], "image");
-                assert.property(metadataList[i], "details");
-                assert.property(metadataList[i], "links");
-                assert.property(metadataList[i], "tags");
-            }
+            assert.isObject(marketMetadata);
+            assert.property(marketMetadata, "source");
+            assert.property(marketMetadata, "marketId");
+            assert.property(marketMetadata, "image");
+            assert.property(marketMetadata, "details");
+            assert.property(marketMetadata, "links");
+            assert.property(marketMetadata, "tags");
+            assert.strictEqual(marketMetadata.source, metadata.source);
+            assert.strictEqual(marketMetadata.marketId, metadata.marketId);
+            assert.strictEqual(marketMetadata.image.toString("hex"), metadata.image.toString("hex"));
+            assert.strictEqual(marketMetadata.details, metadata.details);
+            assert.deepEqual(marketMetadata.links, metadata.links);
+            assert.deepEqual(marketMetadata.tags, metadata.tags);
             done();
         });
     });

@@ -1,6 +1,6 @@
 {
   "name": "ramble",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Decentralized comments and metadata",
   "main": "index.js",
   "scripts": {
