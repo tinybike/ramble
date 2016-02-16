@@ -257,6 +257,8 @@ module.exports = {
         }
     },
 
+    // Set options.sourceless=true to fetch metadata even if it doesn't
+    // have a source field.
     getMarketMetadata: function (market, options, cb) {
         if (!cb && isFunction(options)) {
             cb = options;
@@ -293,7 +295,9 @@ module.exports = {
                         if (err) return nextLog(err);
                         if (!metadata) return nextLog(errors.IPFS_GET_FAILURE);
                         if (metadata.error) return nextLog(errors.IPFS_GET_FAILURE);
-                        metadataList.push(metadata);
+                        if (options.sourceless || metadata.source) {
+                            metadataList.push(metadata);
+                        }
                         nextLog();
                     });
                 }, function (err) {
