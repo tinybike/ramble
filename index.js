@@ -319,7 +319,6 @@ module.exports = {
             cb = cb || function () {};
             var ipfsNodes = new Array(NUM_NODES);
             for (var i = 0; i < NUM_NODES; ++i) {
-                console.log(this.remoteNodes[i]);
                 ipfsNodes[i] = ipfsAPI(this.remoteNodes[i]);
             }
             loop(ipfsNodes, function (node, index, nextNode) {
