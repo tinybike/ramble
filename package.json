@@ -1,6 +1,6 @@
 {
   "name": "ramble",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Decentralized comments and metadata",
   "main": "index.js",
   "scripts": {
@@ -30,9 +30,9 @@
   "dependencies": {
     "async": "^1.5.1",
     "augur-abi": "^0.2.7",
-    "augur-contracts": "^0.4.10",
-    "ethereumjs-connect": "^0.1.5",
-    "ethrpc": "^0.5.1",
+    "augur-contracts": "AugurProject/augur-contracts",
+    "ethereumjs-connect": "^0.1.6",
+    "ethrpc": "^0.5.2",
     "ipfs-api": "^2.13.0",
     "multi-hash": "^0.1.1"
   },
@@ -40,7 +40,7 @@
     "ipfs-api": false
   },
   "devDependencies": {
-    "augur.js": "^0.14.18",
+    "augur.js": "^0.14.20",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
     "coveralls": "^2.11.6",
