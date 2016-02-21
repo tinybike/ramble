@@ -195,7 +195,19 @@ module.exports = {
                             cb(null, metadata);
                         });
                     } else {
-                        metadata = JSON.parse(res.slice(res.indexOf("{"), res.lastIndexOf("}") + 1));
+                        try {
+                            metadata = JSON.parse(res);
+                        } catch (exc) {
+                            console.error("[ramble] Metadata parse error:", exc);
+                            try {
+                                console.log("metadata:", res);
+                                metadata = JSON.parse(res.slice(res.indexOf("{"), res.lastIndexOf("}") + 1));
+                            } catch (err) {
+                                console.error("[ramble] Metadata parse/slice error:", err);
+                                console.log("metadata:", res);
+                                return cb(err);
+                            }
+                        }
                         if (metadata.image && metadata.image.constructor === Array) {
                             metadata.image = self.ipfs.Buffer(metadata.image);
                         }
