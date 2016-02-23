@@ -140,7 +140,19 @@ module.exports = {
                             });
                         });
                     } else {
-                        comment = JSON.parse(res.slice(res.indexOf("{"), res.lastIndexOf("}") + 1));
+                        try {
+                            comment = JSON.parse(res);
+                        } catch (exc) {
+                            console.error("[ramble] Comment parse error:", exc);
+                            try {
+                                console.log("comment:", res);
+                                comment = JSON.parse(res.slice(res.indexOf("{"), res.lastIndexOf("}") + 1));
+                            } catch (err) {
+                                console.error("[ramble] Comment parse/slice error:", err);
+                                console.log("comment:", res);
+                                return cb(err);
+                            }
+                        }
                         if (blockNumber === null || blockNumber === undefined) {
                             return cb(null, {
                                 ipfsHash: ipfsHash,
