@@ -1,5 +1,5 @@
 /**
- * IPFS/Ethereum-powered decentralized comments.
+ * Ramble: IPFS/Ethereum adapter.
  * @author Jack Peterson (jack@tinybike.net)
  */
 
@@ -202,7 +202,11 @@ module.exports = {
                         res.on("end", function () {
                             metadata = JSON.parse(metadata.slice(metadata.indexOf("{"), metadata.lastIndexOf("}") + 1));
                             if (metadata.image) {
-                                metadata.image = self.ipfs.Buffer(metadata.image);
+                                if (metadata.image.constructor === Array) {
+                                    metadata.image = self.ipfs.Buffer(metadata.image);
+                                } else if (!Buffer.isBuffer(metadata.image)) {
+                                    metadata.image = self.ipfs.Buffer(metadata.image, "base64");
+                                }
                             }
                             cb(null, metadata);
                         });
@@ -220,8 +224,12 @@ module.exports = {
                                 return cb(err);
                             }
                         }
-                        if (metadata.image && metadata.image.constructor === Array) {
-                            metadata.image = self.ipfs.Buffer(metadata.image);
+                        if (metadata.image) {
+                            if (metadata.image.constructor === Array) {
+                                metadata.image = self.ipfs.Buffer(metadata.image);
+                            } else if (!Buffer.isBuffer(metadata.image)) {
+                                metadata.image = self.ipfs.Buffer(metadata.image, "base64");
+                            }
                         }
                         cb(null, metadata);
                     }
@@ -434,6 +442,9 @@ module.exports = {
             };
             var broadcast = metadata.broadcast;
             if (broadcast) delete metadata.broadcast;
+            if (metadata.image && Buffer.isBuffer(metadata.image)) {
+                metadata.image = metadata.image.toString("base64");
+            }
             var data = this.ipfs.Buffer(JSON.stringify(metadata));
             this.ipfs.add(data, function (err, files) {
                 if (self.debug) console.log("ipfs.add:", files);

@@ -39716,7 +39716,7 @@ global.ramble = ramble;
 },{"./":140}],140:[function(require,module,exports){
 (function (process,global){
 /**
- * IPFS/Ethereum-powered decentralized comments.
+ * Ramble: IPFS/Ethereum adapter.
  * @author Jack Peterson (jack@tinybike.net)
  */
 
@@ -39919,7 +39919,7 @@ module.exports = {
                         res.on("end", function () {
                             metadata = JSON.parse(metadata.slice(metadata.indexOf("{"), metadata.lastIndexOf("}") + 1));
                             if (metadata.image) {
-                                metadata.image = self.ipfs.Buffer(metadata.image);
+                                metadata.image = self.ipfs.Buffer(metadata.image).toString("base64");
                             }
                             cb(null, metadata);
                         });
@@ -39938,7 +39938,7 @@ module.exports = {
                             }
                         }
                         if (metadata.image && metadata.image.constructor === Array) {
-                            metadata.image = self.ipfs.Buffer(metadata.image);
+                            metadata.image = self.ipfs.Buffer(metadata.image).toString("base64");
                         }
                         cb(null, metadata);
                     }
@@ -40033,6 +40033,7 @@ module.exports = {
                         return nextLog();
                     }
                     var ipfsHash = multihash.encode(abi.unfork(thisLog.data));
+                    console.log("ipfs:", ipfsHash);
                     self.getMetadata(ipfsHash, function (err, metadata) {
                         if (err) return nextLog(err);
                         if (!metadata) return nextLog(errors.IPFS_GET_FAILURE);
