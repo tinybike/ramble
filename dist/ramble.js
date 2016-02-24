@@ -1546,6 +1546,8 @@ module.exports = {
                             key = self.has_value(self.init_contracts, self.tx[method].to);
                             if (key) self.tx[method].to = self.contracts[key];
                         }
+                    } else {
+                        return callback(version);
                     }
                     if (is_function(callback)) callback(null, version);
                 });
@@ -1761,8 +1763,7 @@ module.exports = {
                 this.get_coinbase.bind(this)
             ], function (err) {
                 if (err) {
-                    // if (self.debug) console.error("connect error:", err);
-                    console.error("connect error:", err);
+                    console.error("[async] connect error:", err);
                     return self.connect(rpcinfo, ipcpath, callback, true);
                 }
                 self.update_contracts();
@@ -1777,8 +1778,7 @@ module.exports = {
                 this.connection = true;
                 return true;
             } catch (exc) {
-                // if (self.debug) console.error("augur.connect:", exc);
-                console.error("augur.connect:", exc);
+                console.error("[sync] connect error:", exc);
                 return this.connect(rpcinfo, ipcpath, callback, true);
             }
         }
@@ -39919,7 +39919,11 @@ module.exports = {
                         res.on("end", function () {
                             metadata = JSON.parse(metadata.slice(metadata.indexOf("{"), metadata.lastIndexOf("}") + 1));
                             if (metadata.image) {
-                                metadata.image = self.ipfs.Buffer(metadata.image).toString("base64");
+                                if (metadata.image.constructor === Array) {
+                                    metadata.image = self.ipfs.Buffer(metadata.image);
+                                } else if (!self.ipfs.Buffer.isBuffer(metadata.image)) {
+                                    metadata.image = self.ipfs.Buffer(metadata.image, "base64");
+                                }
                             }
                             cb(null, metadata);
                         });
@@ -39937,8 +39941,12 @@ module.exports = {
                                 return cb(err);
                             }
                         }
-                        if (metadata.image && metadata.image.constructor === Array) {
-                            metadata.image = self.ipfs.Buffer(metadata.image).toString("base64");
+                        if (metadata.image) {
+                            if (metadata.image.constructor === Array) {
+                                metadata.image = self.ipfs.Buffer(metadata.image);
+                            } else if (!self.ipfs.Buffer.isBuffer(metadata.image)) {
+                                metadata.image = self.ipfs.Buffer(metadata.image, "base64");
+                            }
                         }
                         cb(null, metadata);
                     }
@@ -40033,7 +40041,6 @@ module.exports = {
                         return nextLog();
                     }
                     var ipfsHash = multihash.encode(abi.unfork(thisLog.data));
-                    console.log("ipfs:", ipfsHash);
                     self.getMetadata(ipfsHash, function (err, metadata) {
                         if (err) return nextLog(err);
                         if (!metadata) return nextLog(errors.IPFS_GET_FAILURE);
@@ -40152,6 +40159,9 @@ module.exports = {
             };
             var broadcast = metadata.broadcast;
             if (broadcast) delete metadata.broadcast;
+            if (metadata.image && this.ipfs.Buffer.isBuffer(metadata.image)) {
+                metadata.image = metadata.image.toString("base64");
+            }
             var data = this.ipfs.Buffer(JSON.stringify(metadata));
             this.ipfs.add(data, function (err, files) {
                 if (self.debug) console.log("ipfs.add:", files);

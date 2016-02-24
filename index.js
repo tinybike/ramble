@@ -204,7 +204,7 @@ module.exports = {
                             if (metadata.image) {
                                 if (metadata.image.constructor === Array) {
                                     metadata.image = self.ipfs.Buffer(metadata.image);
-                                } else if (!Buffer.isBuffer(metadata.image)) {
+                                } else if (!self.ipfs.Buffer.isBuffer(metadata.image)) {
                                     metadata.image = self.ipfs.Buffer(metadata.image, "base64");
                                 }
                             }
@@ -227,7 +227,7 @@ module.exports = {
                         if (metadata.image) {
                             if (metadata.image.constructor === Array) {
                                 metadata.image = self.ipfs.Buffer(metadata.image);
-                            } else if (!Buffer.isBuffer(metadata.image)) {
+                            } else if (!self.ipfs.Buffer.isBuffer(metadata.image)) {
                                 metadata.image = self.ipfs.Buffer(metadata.image, "base64");
                             }
                         }
@@ -442,7 +442,7 @@ module.exports = {
             };
             var broadcast = metadata.broadcast;
             if (broadcast) delete metadata.broadcast;
-            if (metadata.image && Buffer.isBuffer(metadata.image)) {
+            if (metadata.image && this.ipfs.Buffer.isBuffer(metadata.image)) {
                 metadata.image = metadata.image.toString("base64");
             }
             var data = this.ipfs.Buffer(JSON.stringify(metadata));
