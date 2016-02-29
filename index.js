@@ -201,13 +201,6 @@ module.exports = {
                         res.on("data", function (data) { metadata += data; });
                         res.on("end", function () {
                             metadata = JSON.parse(metadata.slice(metadata.indexOf("{"), metadata.lastIndexOf("}") + 1));
-                            if (metadata.image) {
-                                if (metadata.image.constructor === Array) {
-                                    metadata.image = self.ipfs.Buffer(metadata.image);
-                                } else if (!self.ipfs.Buffer.isBuffer(metadata.image)) {
-                                    metadata.image = self.ipfs.Buffer(metadata.image, "base64");
-                                }
-                            }
                             cb(null, metadata);
                         });
                     } else {
@@ -222,13 +215,6 @@ module.exports = {
                                 console.error("[ramble] Metadata parse/slice error:", err);
                                 console.log("metadata:", res);
                                 return cb(err);
-                            }
-                        }
-                        if (metadata.image) {
-                            if (metadata.image.constructor === Array) {
-                                metadata.image = self.ipfs.Buffer(metadata.image);
-                            } else if (!self.ipfs.Buffer.isBuffer(metadata.image)) {
-                                metadata.image = self.ipfs.Buffer(metadata.image, "base64");
                             }
                         }
                         cb(null, metadata);
