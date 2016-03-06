@@ -1,5 +1,5 @@
 /**
- * Ramble: IPFS/Ethereum adapter.
+ * Ramble: an IPFS/Ethereum adapter.
  * @author Jack Peterson (jack@tinybike.net)
  */
 
@@ -73,7 +73,7 @@ module.exports = {
     localNode: (REMOTE) ? null : constants.IPFS_LOCAL,
 
     getLogs: function (filter, f) {
-        return rpc.broadcast(rpc.marshal("getLogs", filter), f);
+        return this.rpc.broadcast(this.rpc.marshal("getLogs", filter), f);
     },
 
     useLocalNode: function (url) {

@@ -1,13 +1,1354 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports={
+    "2": {
+        "buyAndSellShares": "0x0747a91108ac052a0ed88ca7b21f447b5431d0da",
+        "closeMarket": "0x5b109439001464cf02ceb7d57b453df277aa5e8b",
+        "closeMarketEight": "0x2da0721e7cf4e713efa7c3253fd8994193d4c6d7",
+        "closeMarketFour": "0xde57efcde7e9be460796c631e8295f96ae0b9fa0",
+        "closeMarketOne": "0x185234d6c3ab999231f2507856f3eb329e9a886a",
+        "closeMarketTwo": "0xe5c4f716be9d973b8d2bba67b4379a88bbf33054",
+        "consensus": "0xdcc31bd45eb3cec9897175a3b2995ac9a16cc037",
+        "createBranch": "0xb93a72e5cdbcbf1955c1e77f3aa2d96b6ab33a37",
+        "createEvent": "0x5da3af9186a32e17f8e217407db6313986442054",
+        "createMarket": "0x7285f1ca78d50ceed5449aa4b88aae119997ff65",
+        "createSingleEventMarket": "0x4bfe640479d8a8bf3e4f2b14a8f08d362a6f8c92",
+        "eventResolution": "0x9a87a84662629ba3d2314f8e1396aee95346acc0",
+        "faucets": "0x0975b96375e27a8ddb8856d04f7f7f635fb194a8",
+        "makeReports": "0xe2223191e67b2d3595e9fa6d8cbdfcd9f8affc81",
+        "orderBook": "0xf0f34588f127657646907e5848a9585b5bccfe93",
+        "ramble": "0x3881d38ff80f125793d856fd1a0b0440dc78927d",
+        "sendReputation": "0xd25cd9d49fd95746d5a9f67806ace77a0c0ee396",
+        "transferShares": "0x9b0e15de811cb8a0c1e81ada8c2c2287c3a89c38",
+        "branches": "0x61048e74feb663c667ab64f3f74031cb6b8603b2",
+        "cash": "0x8bb3c2d46642afd004d49041e8b09d24099c3abd",
+        "events": "0x618a2c90aa9ea8eb8eb45b3a2690e30539e18939",
+        "expiringEvents": "0xa5f5921abbdc9fd1f04d14cf93b38620c0d0ec0e",
+        "fxpFunctions": "0x6cfbb1879374737aeaf8e3b390bca2fae492dcf8",
+        "info": "0xa62edbc5f5cb14451156f5de34a989d2b64ab299",
+        "markets": "0x30cc3eb5159ec66f8a896ceb6ad3b9a0cbdbda22",
+        "reporting": "0x955206a8a895fa7c505472c96c68f393b5c542db"
+    },
+    "7": {
+        "buyAndSellShares": "0x271ee62a8577a97d648c4b4eb3a0e56306f711c1",
+        "closeMarket": "0x7a2e05c795fbf585af34cebe760602b8425846dd",
+        "closeMarketEight": "0x66021d8b17cd9b90dc53012ba6c8cec8aaef2d1b",
+        "closeMarketFour": "0xfb5c088e0d2b8400800c61ac0d69cfd11261401c",
+        "closeMarketOne": "0xbfaa24839dec3961c010c4831709bdecbac382f5",
+        "closeMarketTwo": "0x8bb3073196dbdbf425157b3d83156f18c5c0e776",
+        "consensus": "0xc4d92584ea34be5dd2b916c464e55ec9b4bd1f8f",
+        "createBranch": "0xb005839c49a328850bb22359bb66f9ba1a0f9994",
+        "createEvent": "0x0c532debb932ddb5d07eb957bf8ff5975e932ca3",
+        "createMarket": "0x26ff0f6452673ff11dd8497491b271a18c76990e",
+        "createSingleEventMarket": "0x6f5452dca9bbfe8ac9151dd0e67c8dde8b1c6572",
+        "eventResolution": "0xd399af9820be7ddda37c7d85e701bf8ee2337739",
+        "faucets": "0x94bab6be74df76e996b20329dff2ec39d3013dc3",
+        "makeReports": "0x0b7c36b76208e2c968b04dce0658c03c27bfdc00",
+        "orderBook": "0xf86bbf277ae88a8b50ae90d97e1aafb1390e2984",
+        "ramble": "0x2258a25e503b19dc3d2c2fdc9ca57a1d5985e30c",
+        "sendReputation": "0x7e049a60e0106d263ffd0a60bcfbf4f63dd1f2a4",
+        "transferShares": "0x40343b107ef5dee9c240ff5f1f87f0afb6f709dc",
+        "branches": "0x44cecf2528fbc502f31a58cfce99b8bae992b9c4",
+        "cash": "0x9ef25450d88c82118a3395f57e7a29931305ac6d",
+        "events": "0xa95fa8fe1f544d80afa29ffb0a959116c842e110",
+        "expiringEvents": "0xad225235b9da03bbfda4fb79bf4e2356296e7d7f",
+        "fxpFunctions": "0xa1a240f9f505aa06e9eabe405ffab14689dfdda3",
+        "info": "0x087785682381a1316303efb19d1d450562603fca",
+        "markets": "0xfd0f6987c7042e867db9c1dae6e681b2c3648de2",
+        "reporting": "0x9d358fee98edb880e6a4549e21f4ab66dfcadfa7"
+    },
+    "10101": {
+        "buyAndSellShares": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7",
+        "closeMarket": "0x35152caa07026203a1add680771afb690d872d7d",
+        "closeMarketEight": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645",
+        "closeMarketFour": "0xabe47f122a496a732d6c4b38b3ca376d597d75dd",
+        "closeMarketOne": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d",
+        "closeMarketTwo": "0x81a7621e9a286d061b3dea040888a51c96693b1c",
+        "consensus": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68",
+        "createBranch": "0x8c19616de17acdfbc933b99d9f529a689d22098f",
+        "createEvent": "0x5069d883e31429c6dd1325d961f443007747c7a2",
+        "createMarket": "0x3f3276849a878a176b2f02dd48a483e8182a49e4",
+        "createSingleEventMarket": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79",
+        "eventResolution": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7",
+        "faucets": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667",
+        "makeReports": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea",
+        "orderBook": "0x8a4e2993a9972ee035453bb5674816fc3a698718",
+        "ramble": "0xa34c9f6fc047cea795f69b34a063d32e6cb6288c",
+        "sendReputation": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df",
+        "transferShares": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3",
+        "branches": "0x0fbddb6bfb81c8d0965a894567cf4061446072c2",
+        "cash": "0x8f2c2267687cb0f047b28a1b6f945da6e101a0d7",
+        "events": "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55",
+        "expiringEvents": "0x482c57abdce592b39434e3f619ffc3db62ab6d01",
+        "fxpFunctions": "0x708fdfe18bf28afe861a69e95419d183ace003eb",
+        "info": "0x77c424f86a1b80f1e303d1c2651acd6aba653cb6",
+        "markets": "0xc21cfa6688dbfd2eca2548d894aa55fd0bbf1c7e",
+        "reporting": "0xe4714fcbdcdba49629bc408183ef40d120700b8d"
+    },
+    "errors": {
+        "0x": "no response or bad input",
+        "getSimulatedBuy": {
+            "-2": "cost updating error (did you enter a valid quantity?)"
+        },
+        "getSimulatedSell": {
+            "-2": "cost updating error (did you enter a valid quantity?)"
+        },
+        "closeMarket": {
+            "0": "fail/trading not over yet/event not expired or closed already",
+            "-1": "Market has no cash anyway / already closed",
+            "-2": "0 outcome",
+            "-4": "Outcome .5 once, pushback and retry",
+            "-6": "bonded pushed forward market not ready to be resolved",
+            "-7": "event not reportable >.99"
+        },
+        "claimProceeds": {
+            "0": "reporting not done",
+            "-1": "trader doesn't exist"
+        },
+        "report": {
+            "0": "could not set reporter ballot",
+            "-1": "report length does not match number of expiring events",
+            "-2": "voting period expired",
+            "-3": "incorrect hash"
+        },
+        "submitReportHash": {
+            "0": "could not set report hash",
+            "-1": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
+            "-2": "not in hash submitting timeframe or event doesn't exist / not a valid event expiring then",
+            "-4": "already resolved",
+            "-5": ".99 market",
+            "-6": "no markets"
+        },
+        "submitReport": {
+            "-1": "has already reported",
+            "-2": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
+            "-3": "hash doesn't match",
+            "-4": "no rep",
+            "-5": "bad report",
+            "-6": "hash not low enough",
+            "-8": "invalid event",
+            "-9": "already resolved",
+            "-10": "<24 hr left in period, too late to report, able to put up readj. bonds though"
+        },
+        "checkReportValidity": {
+            "-1": "report isn't long enough",
+            "-2": "reporter doesn't exist, voting period is over, or voting period hasn't started yet"
+        },
+        "penalizeNotEnoughReports": {
+            "-1": "already done",
+            "-2": "hasn't reported this period"
+        },
+        "penalizeWrong": {
+            "-1": "pushed back event already resolved, so can't redistribute rep based off of its original expected expiration period",
+            "-2": "already past first half of new period and needed to penalize before then",
+            "-3": "need to do not enough reports penalization [or lackthereof]"
+        },
+        "collectFees": {
+            "-2": "needs to be second half of reporting period to claim rep [1st half is when redistribution is done]"
+        },
+        "slashRep": {
+            "0": "not a valid claim",
+            "-2": "reporter doesn't exist"
+        },
+        "createSubbranch": {
+            "-1": "bad input or parent doesn't exist",
+            "-2": "no money for creation fee or branch already exists"
+        },
+        "createEvent": {
+            "0": "not enough money to pay fees or event already exists",
+            "-1": "we're either already past that date, branch doesn't exist, or description is bad",
+            "-2": "max value < min value"
+        },
+        "createMarket": {
+            "-1": "bad input or parent doesn't exist",
+            "-2": "too many events",
+            "-3": "too many outcomes",
+            "-4": "not enough money or market already exists",
+            "-5": "fee too low",
+            "-6": "duplicate events",
+            "-7": "event already expired"
+        },
+        "sendReputation": {
+            "0": "not enough reputation",
+            "-1": "Your reputation account was just created! Earn some reputation before you can send to others",
+            "-2": "Receiving address doesn't exist"
+        },
+        "buyShares": {
+            "-1": "invalid outcome or trading closed",
+            "-2": "entered a -amt of shares",
+            "-3": "not enough money / limit order too low",
+            "-4": "invalid outcome",
+            "-5": "bad commitment or no commitment",
+            "-6": "oracle only branch, no trading"
+        },
+        "sellShares": {
+            "-1": "invalid outcome, trading closed, or you haven't traded in this market",
+            "-2": "entered a -amt of shares",
+            "-3": "you own no shares / limit price too high",
+            "-5": "bad commitment or no commitment",
+            "-6": "oracle only branch, no trading"
+        },
+        "WHISPER_POST_FAILED": {
+            "error": 65,
+            "message": "could not post message to whisper"
+        },
+        "DB_DELETE_FAILED": {
+            "error": 97,
+            "message": "database delete failed"
+        },
+        "DB_WRITE_FAILED": {
+            "error": 98,
+            "message": "database write failed"
+        },
+        "DB_READ_FAILED": {
+            "error": 99,
+            "message": "database read failed"
+        },
+        "INVALID_CONTRACT_PARAMETER": {
+            "error": 400,
+            "message": "cannot send object parameter to contract"
+        },
+        "NOT_LOGGED_IN": {
+            "error": 401,
+            "message": "not logged in"
+        },
+        "PARAMETER_NUMBER_ERROR": {
+            "error": 402,
+            "message": "wrong number of parameters"
+        },
+        "BAD_CREDENTIALS": {
+            "error": 403,
+            "message": "incorrect handle or password"
+        },
+        "TRANSACTION_NOT_FOUND": {
+            "error": 404,
+            "message": "transaction not found"
+        },
+        "PASSWORD_TOO_SHORT": {
+            "error": 405,
+            "message": "password must be at least 6 characters long"
+        },
+        "NULL_CALL_RETURN": {
+            "error": 406,
+            "message": "expected contract call to return value, received null"
+        },
+        "NULL_RESPONSE": {
+            "error": 407,
+            "message": "expected transaction hash from Ethereum node, received null"
+        },
+        "NO_RESPONSE": {
+            "error": 408,
+            "message": "no response"
+        },
+        "INVALID_RESPONSE": {
+            "error": 409,
+            "message": "could not parse response from Ethereum node"
+        },
+        "LOCAL_NODE_FAILURE": {
+            "error": 410,
+            "message": "RPC request to local Ethereum node failed"
+        },
+        "HOSTED_NODE_FAILURE": {
+            "error": 411,
+            "message": "RPC request to hosted nodes failed"
+        },
+        "HANDLE_TAKEN": {
+            "error": 422,
+            "message": "handle already taken"
+        },
+        "FILTER_NOT_CREATED": {
+            "error": 450,
+            "message": "filter could not be created"
+        },
+        "TRANSACTION_FAILED": {
+            "error": 500,
+            "message": "transaction failed"
+        },
+        "TRANSACTION_NOT_CONFIRMED": {
+            "error": 501,
+            "message": "polled network but could not confirm transaction"
+        },
+        "DUPLICATE_TRANSACTION": {
+            "error": 502,
+            "message": "duplicate transaction"
+        },
+        "RAW_TRANSACTION_ERROR": {
+            "error": 503,
+            "message": "error sending client-side transaction"
+        },
+        "RLP_ENCODING_ERROR": {
+            "error": 504,
+            "message": "RLP encoding error"
+        },
+        "NO_MARKET_INFO": {
+            "error": 505,
+            "message": "could not retrieve market data"
+        },
+        "IPFS_ADD_FAILURE": {
+            "error": 506,
+            "message": "files could not be added to IPFS"
+        },
+        "IPFS_GET_FAILURE": {
+            "error": 507,
+            "message": "could not retrieve file from IPFS"
+        },
+        "RPC_TIMEOUT": {
+            "error": 599,
+            "message": "timed out while waiting for Ethereum network response"
+        },
+        "LOOPBACK_NOT_FOUND": {
+            "error": 650,
+            "message": "loopback interface required for synchronous local commands"
+        },
+        "ETHEREUM_NOT_FOUND": {
+            "error": 651,
+            "message": "no active ethereum node(s) found"
+        },
+        "ROOT_NOT_FOUND": {
+            "error": 700,
+            "message": "no LS-LMSR objectve function solution found"
+        },
+        "CHECK_ORDER_BOOK_FAILED": {
+            "error": 710,
+            "message": "could not check order book using current prices"
+        }
+    }
+}
+},{}],2:[function(require,module,exports){
+module.exports={
+    "0x": "no response or bad input",
+    "getSimulatedBuy": {
+        "-2": "cost updating error (did you enter a valid quantity?)"
+    },
+    "getSimulatedSell": {
+        "-2": "cost updating error (did you enter a valid quantity?)"
+    },
+    "closeMarket": {
+        "0": "fail/trading not over yet/event not expired or closed already",
+        "-1": "Market has no cash anyway / already closed",
+        "-2": "0 outcome",
+        "-4": "Outcome .5 once, pushback and retry",
+        "-6": "bonded pushed forward market not ready to be resolved",
+        "-7": "event not reportable >.99"
+    },
+    "claimProceeds": {
+        "0": "reporting not done",
+        "-1": "trader doesn't exist"
+    },
+    "report": {
+        "0": "could not set reporter ballot",
+        "-1": "report length does not match number of expiring events",
+        "-2": "voting period expired",
+        "-3": "incorrect hash"
+    },
+    "submitReportHash": {
+        "0": "could not set report hash",
+        "-1": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
+        "-2": "not in hash submitting timeframe or event doesn't exist / not a valid event expiring then",
+        "-4": "already resolved",
+        "-5": ".99 market",
+        "-6": "no markets"
+    },
+    "submitReport": {
+        "-1": "has already reported",
+        "-2": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
+        "-3": "hash doesn't match",
+        "-4": "no rep",
+        "-5": "bad report",
+        "-6": "hash not low enough",
+        "-8": "invalid event",
+        "-9": "already resolved",
+        "-10": "<24 hr left in period, too late to report, able to put up readj. bonds though"
+    },
+    "checkReportValidity": {
+        "-1": "report isn't long enough",
+        "-2": "reporter doesn't exist, voting period is over, or voting period hasn't started yet"
+    },
+    "penalizeNotEnoughReports": {
+        "-1": "already done",
+        "-2": "hasn't reported this period"
+    },
+    "penalizationCatchup": {
+        "0": "already caught up on this branch",
+        "-2": "can only be called during the first half of the reporting period"
+    },
+    "penalizeWrong": {
+        "-1": "pushed back event already resolved, so can't redistribute rep based off of its original expected expiration period",
+        "-2": "already past first half of new period and needed to penalize before then",
+        "-3": "need to do not enough reports penalization [or lackthereof]"
+    },
+    "collectFees": {
+        "-2": "needs to be second half of reporting period to claim rep [1st half is when redistribution is done]"
+    },
+    "slashRep": {
+        "0": "not a valid claim",
+        "-2": "reporter doesn't exist"
+    },
+    "createSubbranch": {
+        "-1": "bad input or parent doesn't exist",
+        "-2": "no money for creation fee or branch already exists"
+    },
+    "createEvent": {
+        "-1": "we're either already past that date, branch doesn't exist, or description is bad",
+        "0": "not enough money to pay fees or event already exists",
+        "-2": "max value < min value"
+    },
+    "createMarket": {
+        "-1": "bad input or parent doesn't exist",
+        "-2": "too many events",
+        "-3": "too many outcomes",
+        "-4": "not enough money or market already exists",
+        "-5": "fee too low",
+        "-6": "duplicate events",
+        "-7": "event already expired"
+    },
+    "sendReputation": {
+        "0": "not enough reputation",
+        "-1": "Your reputation account was just created! Earn some reputation before you can send to others",
+        "-2": "Receiving address doesn't exist"
+    },
+    "buyShares": {
+        "-1": "invalid outcome or trading closed",
+        "-2": "entered a -amt of shares",
+        "-3": "not enough money / limit order too low",
+        "-4": "invalid outcome",
+        "-5": "bad commitment or no commitment",
+        "-6": "oracle only branch, no trading"
+    },
+    "sellShares": {
+        "-1": "invalid outcome, trading closed, or you haven't traded in this market",
+        "-2": "entered a -amt of shares",
+        "-3": "you own no shares / limit price too high",
+        "-5": "bad commitment or no commitment",
+        "-6": "oracle only branch, no trading"
+    },
+    "WHISPER_POST_FAILED": {
+        "error": 65,
+        "message": "could not post message to whisper"
+    },
+    "DB_DELETE_FAILED": {
+        "error": 97,
+        "message": "database delete failed"
+    },
+    "DB_WRITE_FAILED": {
+        "error": 98,
+        "message": "database write failed"
+    },
+    "DB_READ_FAILED": {
+        "error": 99,
+        "message": "database read failed"
+    },
+    "INVALID_CONTRACT_PARAMETER": {
+        "error": 400,
+        "message": "cannot send object parameter to contract"
+    },
+    "NOT_LOGGED_IN": {
+        "error": 401,
+        "message": "not logged in"
+    },
+    "PARAMETER_NUMBER_ERROR": {
+        "error": 402,
+        "message": "wrong number of parameters"
+    },
+    "BAD_CREDENTIALS": {
+        "error": 403,
+        "message": "incorrect handle or password"
+    },
+    "TRANSACTION_NOT_FOUND": {
+        "error": 404,
+        "message": "transaction not found"
+    },
+    "PASSWORD_TOO_SHORT": {
+        "error": 405,
+        "message": "password must be at least 6 characters long"
+    },
+    "NULL_CALL_RETURN": {
+        "error": 406,
+        "message": "expected contract call to return value, received null"
+    },
+    "NULL_RESPONSE": {
+        "error": 407,
+        "message": "expected transaction hash from Ethereum node, received null"
+    },
+    "NO_RESPONSE": {
+        "error": 408,
+        "message": "no response"
+    },
+    "INVALID_RESPONSE": {
+        "error": 409,
+        "message": "could not parse response from Ethereum node"
+    },
+    "LOCAL_NODE_FAILURE": {
+        "error": 410,
+        "message": "RPC request to local Ethereum node failed"
+    },
+    "HOSTED_NODE_FAILURE": {
+        "error": 411,
+        "message": "RPC request to hosted nodes failed"
+    },
+    "HANDLE_TAKEN": {
+        "error": 422,
+        "message": "handle already taken"
+    },
+    "FILTER_NOT_CREATED": {
+        "error": 450,
+        "message": "filter could not be created"
+    },
+    "TRANSACTION_FAILED": {
+        "error": 500,
+        "message": "transaction failed"
+    },
+    "TRANSACTION_NOT_CONFIRMED": {
+        "error": 501,
+        "message": "polled network but could not confirm transaction"
+    },
+    "DUPLICATE_TRANSACTION": {
+        "error": 502,
+        "message": "duplicate transaction"
+    },
+    "RAW_TRANSACTION_ERROR": {
+        "error": 503,
+        "message": "error sending client-side transaction"
+    },
+    "RLP_ENCODING_ERROR": {
+        "error": 504,
+        "message": "RLP encoding error"
+    },
+    "NO_MARKET_INFO": {
+        "error": 505,
+        "message": "could not retrieve market data"
+    },
+    "IPFS_ADD_FAILURE": {
+        "error": 506,
+        "message": "files could not be added to IPFS"
+    },
+    "IPFS_GET_FAILURE": {
+        "error": 507,
+        "message": "could not retrieve file from IPFS"
+    },
+    "RPC_TIMEOUT": {
+        "error": 599,
+        "message": "timed out while waiting for Ethereum network response"
+    },
+    "LOOPBACK_NOT_FOUND": {
+        "error": 650,
+        "message": "loopback interface required for synchronous local commands"
+    },
+    "ETHEREUM_NOT_FOUND": {
+        "error": 651,
+        "message": "no active ethereum node(s) found"
+    },
+    "ROOT_NOT_FOUND": {
+        "error": 700,
+        "message": "no LS-LMSR objectve function solution found"
+    },
+    "CHECK_ORDER_BOOK_FAILED": {
+        "error": 710,
+        "message": "could not check order book using current prices"
+    }
+}
+
+},{}],3:[function(require,module,exports){
+var contracts = require("./contracts");
+contracts.errors = require("./errors");
+contracts.Tx = require("./tx");
+
+module.exports = contracts;
+
+},{"./contracts":1,"./errors":2,"./tx":4}],4:[function(require,module,exports){
+/**
+ * Augur transactions
+ */
+
+"use strict";
+
+module.exports = function (network) {
+
+    var contracts = require("./contracts")[network];
+
+    return {
+
+        // faucets.se
+        reputationFaucet: {
+            to: contracts.faucets,
+            method: "reputationFaucet",
+            signature: "i",
+            returns: "number",
+            send: true
+        },
+        cashFaucet: {
+            to: contracts.faucets,
+            method: "cashFaucet",
+            returns: "number",
+            send: true
+        },
+        fundNewAccount: {
+            to: contracts.faucets,
+            method: "fundNewAccount",
+            signature: "i",
+            returns: "number",
+            send: true
+        },
+
+        // createSingleEventMarket.se
+        createSingleEventMarket: {
+            to: contracts.createSingleEventMarket,
+            method: "createSingleEventMarket",
+            signature: "isiiiiiiii",
+            returns: "hash",
+            send: true
+        },
+
+        // cash.se
+        addCash: {
+            to: contracts.cash,
+            method: "addCash",
+            signature: "ii",
+            send: true,
+            returns: "number"
+        },
+        setCash: {
+            to: contracts.cash,
+            method: "setCash",
+            signature: "ii",
+            send: true,
+            returns: "number"
+        },
+        initiateOwner: {
+            to: contracts.cash,
+            method: "initiateOwner",
+            signature: "i",
+            send: true,
+            returns: "number"
+        },
+        getCashBalance: {
+            to: contracts.cash,
+            method: "balance",
+            signature: "i",
+            returns: "unfix"
+        },
+        balance: {
+            to: contracts.cash,
+            method: "balance",
+            signature: "i",
+            returns: "unfix"
+        },
+        sendCash: {
+            to: contracts.cash,
+            method: "send",
+            send: true,
+            signature: "ii",
+            returns: "unfix"
+        },
+        sendCashFrom: {
+            to: contracts.cash,
+            method: "sendFrom",
+            send: true,
+            signature: "iii",
+            returns: "unfix"
+        },
+        depositEther: {
+            to: contracts.cash,
+            method: "depositEther",
+            send: true,
+            returns: "number"
+        },
+        withdrawEther: {
+            to: contracts.cash,
+            method: "withdrawEther",
+            signature: "ii",
+            send: true,
+            returns: "number"
+        },
+
+        // info.se
+        getCreator: {
+            to: contracts.info,
+            method: "getCreator",
+            signature: "i",
+            returns: "address"
+        },
+        getCreationFee: {
+            to: contracts.info,
+            method: "getCreationFee",
+            signature: "i",
+            returns: "unfix"
+        },
+        getDescription: {
+            to: contracts.info,
+            method: "getDescription",
+            signature: "i",
+            returns: "string"
+        },
+        setInfo: {
+            to: contracts.info,
+            method: "setInfo",
+            signature: "isii",
+            returns: "number",
+            send: true
+        },
+
+        // redeem_interpolate.se
+        redeem_interpolate: {
+            to: contracts.redeem_interpolate,
+            method: "interpolate",
+            signature: "iiiii"
+        },
+        read_ballots: {
+            to: contracts.redeem_interpolate,
+            method: "read_ballots",
+            signature: "iiiii"
+        },
+
+        // branches.se
+        initDefaultBranch: {
+            to: contracts.branches,
+            method: "initDefaultBranch",
+            returns: "number",
+            send: true
+        },
+        getBranches: {
+            to: contracts.branches,
+            method: "getBranches",
+            returns: "hash[]"
+        },
+        getMarketsInBranch: {
+            to: contracts.branches,
+            method: "getMarketsInBranch",
+            signature: "i",
+            returns: "hash[]"
+        },
+        getPeriodLength: {
+            to: contracts.branches,
+            method: "getPeriodLength",
+            signature: "i",
+            returns: "number"
+        },
+        getVotePeriod: {
+            to: contracts.branches,
+            method: "getVotePeriod",
+            signature: "i",
+            returns: "number"
+        },
+        getNumMarketsBranch: {
+            to: contracts.branches,
+            method: "getNumMarketsBranch",
+            signature: "i",
+            returns: "number"
+        },
+        getMinTradingFee: {
+            to: contracts.branches,
+            method: "getMinTradingFee",
+            signature: "i",
+            returns: "unfix"
+        },
+        getNumBranches: {
+            to: contracts.branches,
+            method: "getNumBranches",
+            returns: "number"
+        },
+        getBranch: {
+            to: contracts.branches,
+            method: "getBranch",
+            signature: "i",
+            returns: "hash"
+        },
+        incrementPeriod: {
+            to: contracts.branches,
+            method: "incrementPeriod",
+            signature: "i",
+            send: true,
+            returns: "number"
+        },
+        addMarket: {
+            to: contracts.branches,
+            method: "addMarket",
+            signature: "ii",
+            returns: "number",
+            send: true
+        },
+
+        // consensus.se
+        incrementPeriodAfterReporting: {
+            to: contracts.consensus,
+            method: "incrementPeriodAfterReporting",
+            signature: "i",
+            returns: "number",
+            send: true
+        },
+        penalizeNotEnoughReports: {
+            to: contracts.consensus,
+            method: "penalizeNotEnoughReports",
+            signature: "i",
+            returns: "number",
+            send: true
+        },
+        collectFees: {
+            to: contracts.consensus,
+            method: "collectFees",
+            signature: "i",
+            returns: "number",
+            send: true
+        },
+        penalizeWrong: {
+            to: contracts.consensus,
+            method: "penalizeWrong",
+            signature: "ii",
+            returns: "number",
+            send: true
+        },
+        penalizationCatchup: {
+            to: contracts.consensus,
+            method: "penalizationCatchup",
+            signature: "i",
+            returns: "number",
+            send: true
+        },
+        slashRep: {
+            to: contracts.consensus,
+            method: "slashRep",
+            signature: "iiiii",
+            returns: "number",
+            send: true
+        },
+
+        // events.se
+        getMarkets: {
+            to: contracts.events,
+            method: "getMarkets",
+            signature: "i",
+            returns: "hash[]"
+        },
+        getReportingThreshold: {
+            to: contracts.events,
+            method: "getReportingThreshold",
+            signature: "i",
+            returns: "unfix"
+        },
+        getEventInfo: {
+            to: contracts.events,
+            method: "getEventInfo",
+            signature: "i",
+            returns: "hash[]"
+        },
+        getEventBranch: {
+            to: contracts.events,
+            method: "getEventBranch",
+            signature: "i",
+            returns: "hash"
+        },
+        getExpiration: {
+            to: contracts.events,
+            method: "getExpiration",
+            signature: "i",
+            returns: "number"
+        },
+        getOutcome: {
+            to: contracts.events,
+            method: "getOutcome",
+            signature: "i",
+            returns: "unfix"
+        },
+        getMinValue: {
+            to: contracts.events,
+            method: "getMinValue",
+            signature: "i",
+            returns: "number"
+        },
+        getMaxValue: {
+            to: contracts.events,
+            method: "getMaxValue",
+            signature: "i",
+            returns: "number"
+        },
+        getNumOutcomes: {
+            to: contracts.events,
+            method: "getNumOutcomes",
+            signature: "i",
+            returns: "number"
+        },
+        setOutcome: {
+            to: contracts.events,
+            method: "setOutcome",
+            signature: "ii",
+            returns: "number",
+            send: true
+        },
+
+        // expiringEvents.se
+        getEventIndex: {
+            to: contracts.expiringEvents,
+            method: "getEventIndex",
+            signature: "ii",
+            returns: "number"
+        },
+        getEvents: {
+            to: contracts.expiringEvents,
+            method: "getEvents",
+            signature: "ii",
+            returns: "hash[]"
+        },
+        getNumberEvents: {
+            to: contracts.expiringEvents,
+            method: "getNumberEvents",
+            signature: "ii",
+            returns: "number"
+        },
+        getEvent: {
+            to: contracts.expiringEvents,
+            method: "getEvent",
+            signature: "iii",
+            returns: "hash"
+        },
+        getTotalRepReported: {
+            to: contracts.expiringEvents,
+            method: "getTotalRepReported",
+            signature: "ii",
+            returns: "number"
+        },
+        getReportHash: {
+            to: contracts.expiringEvents,
+            method: "getReportHash",
+            signature: "iiii",
+            returns: "hash"
+        },
+        moveEventsToCurrentPeriod: {
+            to: contracts.expiringEvents,
+            method: "moveEventsToCurrentPeriod",
+            signature: "iii",
+            send: true
+        },
+        addEvent: {
+            to: contracts.expiringEvents,
+            method: "addEvent",
+            signature: "iii",
+            send: true
+        },
+        setTotalRepReported: {
+            to: contracts.expiringEvents,
+            method: "setTotalRepReported",
+            signature: "iii",
+            send: true
+        },
+        setReporterBallot: {
+            to: contracts.expiringEvents,
+            method: "setReporterBallot",
+            signature: "iiiai",
+            send: true,
+            returns: "number"
+        },
+        getTotalReputation: {
+            to: contracts.expiringEvents,
+            method: "getTotalReputation",
+            signature: "ii",
+            returns: "unfix"
+        },
+        setTotalReputation: {
+            to: contracts.expiringEvents,
+            method: "setTotalReputation",
+            signature: "iii",
+            returns: "number"
+        },
+
+        // markets.se
+        price: {
+            to: contracts.markets,
+            method: "price",
+            signature: "ii",
+            returns: "unfix"
+        },
+        lsLmsr: {
+            to: contracts.markets,
+            method: "lsLmsr",
+            signature: "i",
+            returns: "unfix"
+        },
+        getMarketInfo: {
+            to: contracts.markets,
+            method: "getMarketInfo",
+            signature: "i",
+            returns: "hash[]",
+            gas: 9999999999999
+        },
+        getMarketsInfo: {
+            to: contracts.markets,
+            method: "getMarketsInfo",
+            signature: "iii",
+            returns: "hash[]",
+            gas: 9999999999999
+        },
+        getMarketEvents: {
+            to: contracts.markets,
+            method: "getMarketEvents",
+            signature: "i",
+            returns: "hash[]"
+        },
+        getNumEvents: {
+            to: contracts.markets,
+            method: "getNumEvents",
+            signature: "i",
+            returns: "number"
+        },
+        getBranchID: {
+            to: contracts.markets,
+            method: "getBranchID",
+            signature: "i",
+            returns: "hash"
+        },
+        getCurrentParticipantNumber: {
+            to: contracts.markets,
+            method: "getCurrentParticipantNumber",
+            signature: "i",
+            returns: "number"
+        },
+        getMarketNumOutcomes: {
+            to: contracts.markets,
+            method: "getMarketNumOutcomes",
+            signature: "i",
+            returns: "number"
+        },
+        getParticipantSharesPurchased: {
+            to: contracts.markets,
+            method: "getParticipantSharesPurchased",
+            signature: "iii",
+            returns: "unfix"
+        },
+        getSharesPurchased: {
+            to: contracts.markets,
+            method: "getSharesPurchased",
+            signature: "ii",
+            returns: "unfix"
+        },
+        getForkSelection: {
+            to: contracts.markets,
+            method: "getForkSelection",
+            signature: "i",
+            returns: "hash"
+        },
+        getVolume: {
+            to: contracts.markets,
+            method: "getVolume",
+            signature: "i",
+            returns: "unfix"
+        },
+        getWinningOutcomes: {
+            to: contracts.markets,
+            method: "getWinningOutcomes",
+            signature: "i",
+            returns: "number[]"
+        },
+        getParticipantNumber: {
+            to: contracts.markets,
+            method: "getParticipantNumber",
+            signature: "ii",
+            returns: "number"
+        },
+        getParticipantID: {
+            to: contracts.markets,
+            method: "getParticipantID",
+            signature: "ii",
+            returns: "address"
+        },
+        getAlpha: {
+            to: contracts.markets,
+            method: "getAlpha",
+            signature: "i",
+            returns: "unfix"
+        },
+        getCumScale: {
+            to: contracts.markets,
+            method: "getCumScale",
+            signature: "i",
+            returns: "unfix"
+        },
+        getTradingPeriod: {
+            to: contracts.markets,
+            method: "getTradingPeriod",
+            signature: "i",
+            returns: "number"
+        },
+        getTradingFee: {
+            to: contracts.markets,
+            method: "getTradingFee",
+            signature: "i",
+            returns: "unfix"
+        },
+        initialLiquidityAmount: {
+            to: contracts.markets,
+            method: "initialLiquidityAmount",
+            signature: "ii",
+            returns: "unfix"
+        },
+        initialLiquiditySetup: {
+            to: contracts.markets,
+            method: "initialLiquiditySetup",
+            signature: "iiii",
+            returns: "number",
+            send: true
+        },
+        modifyShares: {
+            to: contracts.markets,
+            method: "modifyShares",
+            signature: "iii",
+            returns: "number",
+            send: true
+        },
+        initializeMarket: {
+            to: contracts.markets,
+            method: "initializeMarket",
+            signature: "iaiii",
+            returns: "number",
+            send: true
+        },
+
+        // reporting.se
+        getRepBalance: {
+            to: contracts.reporting,
+            method: "getRepBalance",
+            signature: "ii",
+            returns: "unfix"
+        },
+        getRepByIndex: {
+            to: contracts.reporting,
+            method: "getRepByIndex",
+            signature: "ii",
+            returns: "unfix"
+        },
+        getReporterID: {
+            to: contracts.reporting,
+            method: "getReporterID",
+            signature: "ii",
+            returns: "address"
+        },
+        getReputation: {
+            to: contracts.reporting,
+            method: "getReputation",
+            signature: "i",
+            returns: "number[]"
+        },
+        getNumberReporters: {
+            to: contracts.reporting,
+            method: "getNumberReporters",
+            signature: "i",
+            returns: "number"
+        },
+        repIDToIndex: {
+            to: contracts.reporting,
+            method: "repIDToIndex",
+            signature: "ii",
+            returns: "number"
+        },
+        getTotalRep: {
+            to: contracts.reporting,
+            method: "getTotalRep",
+            signature: "i",
+            returns: "unfix"
+        },
+        hashReport: {
+            to: contracts.reporting,
+            method: "hashReport",
+            signature: "ai"
+        },
+
+        // buy&sellShares.se
+        commitTrade: {
+            to: contracts.buyAndSellShares,
+            method: "commitTrade",
+            signature: "ii",
+            returns: "number",
+            send: true
+        },
+        buyShares: {
+            to: contracts.buyAndSellShares,
+            method: "buyShares",
+            signature: "iiiii",
+            returns: "number",
+            send: true
+        },
+        sellShares: {
+            to: contracts.buyAndSellShares,
+            method: "sellShares",
+            signature: "iiiii",
+            returns: "number",
+            send: true
+        },
+
+        // createBranch.se
+        createSubbranch: {
+            to: contracts.createBranch,
+            method: "createSubbranch",
+            signature: "siiii",
+            returns: "hash",
+            send: true
+        },
+
+        // sendReputation.se
+        sendReputation: {
+            to: contracts.sendReputation,
+            method: "sendReputation",
+            signature: "iii",
+            send: true,
+            returns: "unfix"
+        },
+
+        // makeReports.se
+        getNumEventsToReport: {
+            to: contracts.makeReports,
+            method: "getNumEventsToReport",
+            signature: "ii",
+            returns: "number"
+        },
+        getReportedPeriod: {
+            to: contracts.makeReports,
+            method: "getReportedPeriod",
+            signature: "iii",
+            returns: "number"
+        },
+        getReportable: {
+            to: contracts.makeReports,
+            method: "getReportable",
+            signature: "ii",
+            returns: "number"
+        },
+        getNumReportsActual: {
+            to: contracts.makeReports,
+            method: "getNumReportsActual",
+            signature: "ii",
+            returns: "number"
+        },
+        getSubmittedHash: {
+            to: contracts.makeReports,
+            method: "getSubmittedHash",
+            signature: "iii",
+            returns: "hash"
+        },
+        getBeforeRep: {
+            to: contracts.makeReports,
+            method: "getBeforeRep",
+            signature: "ii",
+            returns: "unfix"
+        },
+        getAfterRep: {
+            to: contracts.makeReports,
+            method: "getAfterRep",
+            signature: "ii",
+            returns: "unfix"
+        },
+        getReport: {
+            to: contracts.makeReports,
+            method: "getReport",
+            signature: "iii",
+            returns: "unfix"
+        },
+        getRRUpToDate: {
+            to: contracts.makeReports,
+            method: "getRRUpToDate",
+            returns: "number"
+        },
+        getNumReportsExpectedEvent: {
+            to: contracts.makeReports,
+            method: "getNumReportsExpectedEvent",
+            signature: "iii",
+            returns: "hash"
+        },
+        getNumReportsEvent: {
+            to: contracts.makeReports,
+            method: "getNumReportsEvent",
+            signature: "iii",
+            returns: "hash"
+        },
+        makeHash: {
+            to: contracts.makeReports,
+            method: "makeHash",
+            signature: "iii",
+            returns: "hash"
+        },
+        report: {
+            to: contracts.makeReports,
+            method: "report",
+            signature: "iaii",
+            returns: "number",
+            send: true
+        },
+        calculateReportingThreshold: {
+            to: contracts.makeReports,
+            method: "calculateReportingThreshold",
+            signature: "iii",
+            returns: "hash"
+        },
+        submitReportHash: {
+            to: contracts.makeReports,
+            method: "submitReportHash",
+            signature: "iiiii",
+            returns: "number",
+            send: true
+        },
+        submitReport: {
+            to: contracts.makeReports,
+            method: "submitReport",
+            signature: "iiiiiii",
+            returns: "number",
+            send: true
+        },
+        checkReportValidity: {
+            to: contracts.makeReports,
+            method: "checkReportValidity",
+            signature: "iai",
+            returns: "number"
+        },
+
+        // createEvent.se
+        createEvent: {
+            to: contracts.createEvent,
+            method: "createEvent",
+            signature: "isiiii",
+            send: true
+        },
+
+        // createMarket.se
+        createMarket: {
+            to: contracts.createMarket,
+            method: "createMarket",
+            signature: "isiiiai",
+            send: true
+        },
+
+        // closeMarket.se
+        closeMarket: {
+            to: contracts.closeMarket,
+            method: "closeMarket",
+            signature: "ii",
+            returns: "number",
+            send: true
+        },
+        claimProceeds: {
+            to: contracts.closeMarket,
+            method: "claimProceeds",
+            signature: "ii",
+            returns: "number",
+            send: true
+        },
+
+        // dispatch.se
+        dispatch: {
+            to: contracts.dispatch,
+            method: "dispatch",
+            signature: "i",
+            returns: "number"
+        }
+    };
+
+};
+
+},{"./contracts":1}],5:[function(require,module,exports){
 (function (global){
 var ramble = global.ramble || require("./");
 global.ramble = ramble;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./":2}],2:[function(require,module,exports){
+},{"./":6}],6:[function(require,module,exports){
 (function (process,global){
 /**
- * Ramble: IPFS/Ethereum adapter.
+ * Ramble: an IPFS/Ethereum adapter.
  * @author Jack Peterson (jack@tinybike.net)
  */
 
@@ -81,7 +1422,7 @@ module.exports = {
     localNode: (REMOTE) ? null : constants.IPFS_LOCAL,
 
     getLogs: function (filter, f) {
-        return rpc.broadcast(rpc.marshal("getLogs", filter), f);
+        return this.rpc.broadcast(this.rpc.marshal("getLogs", filter), f);
     },
 
     useLocalNode: function (url) {
@@ -468,7 +1809,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":229,"async":3,"augur-abi":4,"augur-contracts":9,"ethereumjs-connect":262,"ethrpc":267,"ipfs-api":13,"multi-hash":401}],3:[function(require,module,exports){
+},{"_process":229,"async":7,"augur-abi":8,"augur-contracts":3,"ethereumjs-connect":262,"ethrpc":267,"ipfs-api":13,"multi-hash":401}],7:[function(require,module,exports){
 (function (process,global){
 /*!
  * async
@@ -1737,7 +3078,7 @@ module.exports = {
 }());
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":229}],4:[function(require,module,exports){
+},{"_process":229}],8:[function(require,module,exports){
 (function (Buffer){
 /**
  * Ethereum contract ABI data serialization.
@@ -2346,7 +3687,7 @@ module.exports = {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"bignumber.js":5,"buffer":27,"js-sha3":6}],5:[function(require,module,exports){
+},{"bignumber.js":9,"buffer":27,"js-sha3":10}],9:[function(require,module,exports){
 /*! bignumber.js v2.1.3 https://github.com/MikeMcl/bignumber.js/LICENCE */
 
 ;(function (globalObj) {
@@ -5044,7 +6385,7 @@ module.exports = {
     }
 })(this);
 
-},{}],6:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (global){
 /*
  * js-sha3 v0.3.1
@@ -5480,1508 +6821,7 @@ module.exports = {
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],7:[function(require,module,exports){
-module.exports={
-    "2": {
-        "buyAndSellShares": "0x84c9426dfabdd67f5971e01aa670108b3d484897",
-        "closeMarket": "0x8fa98ce5640bf3d9dfb39d6e1e3df53050170f2d",
-        "closeMarketEight": "0x49c6a06be22ae1f9f9f2640e3758520368a6a36f",
-        "closeMarketFour": "0x48bd90daffb8ff7e1271f4bcdfeea9b14f0bff29",
-        "closeMarketOne": "0x957b740ba2f080290af77844fe38950cc64cc71c",
-        "closeMarketTwo": "0x9f42c11b0427e7ba19f2bc27ea38107966e45335",
-        "consensus": "0xf1e2c34c20a689565a3cea832b318d1c616c0bcb",
-        "createBranch": "0x4ea95d7126b56b1e7f6fc191c4438571fdc39b4c",
-        "createEvent": "0x6cfb5f9c58e245884c547c59262a8f3ea4154e52",
-        "createMarket": "0x698ed96ea769d43820eb8f7b153e48b4495b6d88",
-        "createSingleEventMarket": "0x6f5452dca9bbfe8ac9151dd0e67c8dde8b1c6572",
-        "eventResolution": "0x42d42ad6aeebfd1e936a78d56a98b40018b642c7",
-        "faucets": "0x68171933b55d3d3116740e1f05db7963c3696992",
-        "makeReports": "0x5cc23802250ef94563567ffbb5469be0625e1997",
-        "orderBook": "0x434038b04687235092832efcca183d1a681ef86c",
-        "ramble": "0xf87750a16a769e50b5dab391db757668c8fb7c00",
-        "sendReputation": "0xeff47347768f55b9a597dd547e8647491471a04f",
-        "transferShares": "0xe172bce50e213c7e60879a6ed38f84b2391fa282",
-        "branches": "0x8efb14b331eb71b1e76004bcc648877e9b89ccc9",
-        "cash": "0xf609fe70f96ea7a18eb3702716c71652778bab92",
-        "events": "0xdeb64524a59b99c9a9459ac091f9b9a4e8a3dfa1",
-        "expiringEvents": "0x3c5ba3bbfc12f1dc647051f3656b0b27c024b69d",
-        "fxpFunctions": "0x234375b8c8cd67078c871be1be1ca5472e313d57",
-        "info": "0xf5c5720bf4122774ce081682c24ad43e495d4a30",
-        "markets": "0x62a699cee4007bb3b850e6597e747cfedbe2e1e4",
-        "reporting": "0xa33d98c6a53e42110ccfaaba42217726e6b46735"
-    },
-    "7": {
-        "buyAndSellShares": "0x271ee62a8577a97d648c4b4eb3a0e56306f711c1",
-        "closeMarket": "0x7a2e05c795fbf585af34cebe760602b8425846dd",
-        "closeMarketEight": "0x66021d8b17cd9b90dc53012ba6c8cec8aaef2d1b",
-        "closeMarketFour": "0xfb5c088e0d2b8400800c61ac0d69cfd11261401c",
-        "closeMarketOne": "0xbfaa24839dec3961c010c4831709bdecbac382f5",
-        "closeMarketTwo": "0x8bb3073196dbdbf425157b3d83156f18c5c0e776",
-        "consensus": "0xc4d92584ea34be5dd2b916c464e55ec9b4bd1f8f",
-        "createBranch": "0xb005839c49a328850bb22359bb66f9ba1a0f9994",
-        "createEvent": "0x0c532debb932ddb5d07eb957bf8ff5975e932ca3",
-        "createMarket": "0x26ff0f6452673ff11dd8497491b271a18c76990e",
-        "eventResolution": "0xd399af9820be7ddda37c7d85e701bf8ee2337739",
-        "faucets": "0x94bab6be74df76e996b20329dff2ec39d3013dc3",
-        "makeReports": "0x0b7c36b76208e2c968b04dce0658c03c27bfdc00",
-        "orderBook": "0xf86bbf277ae88a8b50ae90d97e1aafb1390e2984",
-        "ramble": "0x2258a25e503b19dc3d2c2fdc9ca57a1d5985e30c",
-        "sendReputation": "0x7e049a60e0106d263ffd0a60bcfbf4f63dd1f2a4",
-        "transferShares": "0x40343b107ef5dee9c240ff5f1f87f0afb6f709dc",
-        "branches": "0x44cecf2528fbc502f31a58cfce99b8bae992b9c4",
-        "cash": "0x9ef25450d88c82118a3395f57e7a29931305ac6d",
-        "events": "0xa95fa8fe1f544d80afa29ffb0a959116c842e110",
-        "expiringEvents": "0xad225235b9da03bbfda4fb79bf4e2356296e7d7f",
-        "fxpFunctions": "0xa1a240f9f505aa06e9eabe405ffab14689dfdda3",
-        "info": "0x087785682381a1316303efb19d1d450562603fca",
-        "markets": "0xfd0f6987c7042e867db9c1dae6e681b2c3648de2",
-        "reporting": "0x9d358fee98edb880e6a4549e21f4ab66dfcadfa7"
-    },
-    "10101": {
-        "buyAndSellShares": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7",
-        "closeMarket": "0x35152caa07026203a1add680771afb690d872d7d",
-        "closeMarketEight": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645",
-        "closeMarketFour": "0xabe47f122a496a732d6c4b38b3ca376d597d75dd",
-        "closeMarketOne": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d",
-        "closeMarketTwo": "0x81a7621e9a286d061b3dea040888a51c96693b1c",
-        "consensus": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79",
-        "createBranch": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df",
-        "createEvent": "0x5069d883e31429c6dd1325d961f443007747c7a2",
-        "createMarket": "0x3f3276849a878a176b2f02dd48a483e8182a49e4",
-        "eventResolution": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7",
-        "faucets": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667",
-        "makeReports": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea",
-        "orderBook": "0x8a4e2993a9972ee035453bb5674816fc3a698718",
-        "ramble": "0xa34c9f6fc047cea795f69b34a063d32e6cb6288c",
-        "sendReputation": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68",
-        "transferShares": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3",
-        "branches": "0x0fbddb6bfb81c8d0965a894567cf4061446072c2",
-        "cash": "0x8f2c2267687cb0f047b28a1b6f945da6e101a0d7",
-        "events": "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55",
-        "expiringEvents": "0x482c57abdce592b39434e3f619ffc3db62ab6d01",
-        "fxpFunctions": "0x708fdfe18bf28afe861a69e95419d183ace003eb",
-        "info": "0x77c424f86a1b80f1e303d1c2651acd6aba653cb6",
-        "markets": "0xc21cfa6688dbfd2eca2548d894aa55fd0bbf1c7e",
-        "reporting": "0xe4714fcbdcdba49629bc408183ef40d120700b8d"
-    },
-    "errors": {
-        "0x": "no response or bad input",
-        "getSimulatedBuy": {
-            "-2": "cost updating error (did you enter a valid quantity?)"
-        },
-        "getSimulatedSell": {
-            "-2": "cost updating error (did you enter a valid quantity?)"
-        },
-        "closeMarket": {
-            "0": "fail/trading not over yet/event not expired or closed already",
-            "-1": "Market has no cash anyway / already closed",
-            "-2": "0 outcome",
-            "-4": "Outcome .5 once, pushback and retry",
-            "-6": "bonded pushed forward market not ready to be resolved",
-            "-7": "event not reportable >.99"
-        },
-        "claimProceeds": {
-            "0": "reporting not done",
-            "-1": "trader doesn't exist"
-        },
-        "report": {
-            "0": "could not set reporter ballot",
-            "-1": "report length does not match number of expiring events",
-            "-2": "voting period expired",
-            "-3": "incorrect hash"
-        },
-        "submitReportHash": {
-            "0": "could not set report hash",
-            "-1": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
-            "-2": "not in hash submitting timeframe or event doesn't exist / not a valid event expiring then",
-            "-4": "already resolved",
-            "-5": ".99 market",
-            "-6": "no markets"
-        },
-        "submitReport": {
-            "-1": "has already reported",
-            "-2": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
-            "-3": "hash doesn't match",
-            "-4": "no rep",
-            "-5": "bad report",
-            "-6": "hash not low enough",
-            "-8": "invalid event",
-            "-9": "already resolved",
-            "-10": "<24 hr left in period, too late to report, able to put up readj. bonds though"
-        },
-        "checkReportValidity": {
-            "-1": "report isn't long enough",
-            "-2": "reporter doesn't exist, voting period is over, or voting period hasn't started yet"
-        },
-        "slashRep": {
-            "0": "incorrect hash",
-            "-2": "incorrect reporter ID"
-        },
-        "createSubbranch": {
-            "-1": "bad input or parent doesn't exist",
-            "-2": "no money for creation fee or branch already exists"
-        },
-        "createEvent": {
-            "0": "not enough money to pay fees or event already exists",
-            "-1": "we're either already past that date, branch doesn't exist, or description is bad",
-            "-2": "max value < min value"
-        },
-        "createMarket": {
-            "-1": "bad input or parent doesn't exist",
-            "-2": "too many events",
-            "-3": "too many outcomes",
-            "-4": "not enough money or market already exists",
-            "-5": "fee too low",
-            "-6": "duplicate events",
-            "-7": "event already expired"
-        },
-        "sendReputation": {
-            "0": "not enough reputation",
-            "-1": "Your reputation account was just created! Earn some reputation before you can send to others",
-            "-2": "Receiving address doesn't exist"
-        },
-        "buyShares": {
-            "-1": "invalid outcome or trading closed",
-            "-2": "entered a -amt of shares",
-            "-3": "not enough money / limit order too low",
-            "-4": "invalid outcome",
-            "-5": "bad commitment or no commitment",
-            "-6": "oracle only branch, no trading"
-        },
-        "sellShares": {
-            "-1": "invalid outcome, trading closed, or you haven't traded in this market",
-            "-2": "entered a -amt of shares",
-            "-3": "you own no shares / limit price too high",
-            "-5": "bad commitment or no commitment",
-            "-6": "oracle only branch, no trading"
-        },
-        "WHISPER_POST_FAILED": {
-            "error": 65,
-            "message": "could not post message to whisper"
-        },
-        "DB_DELETE_FAILED": {
-            "error": 97,
-            "message": "database delete failed"
-        },
-        "DB_WRITE_FAILED": {
-            "error": 98,
-            "message": "database write failed"
-        },
-        "DB_READ_FAILED": {
-            "error": 99,
-            "message": "database read failed"
-        },
-        "INVALID_CONTRACT_PARAMETER": {
-            "error": 400,
-            "message": "cannot send object parameter to contract"
-        },
-        "NOT_LOGGED_IN": {
-            "error": 401,
-            "message": "not logged in"
-        },
-        "PARAMETER_NUMBER_ERROR": {
-            "error": 402,
-            "message": "wrong number of parameters"
-        },
-        "BAD_CREDENTIALS": {
-            "error": 403,
-            "message": "incorrect handle or password"
-        },
-        "TRANSACTION_NOT_FOUND": {
-            "error": 404,
-            "message": "transaction not found"
-        },
-        "PASSWORD_TOO_SHORT": {
-            "error": 405,
-            "message": "password must be at least 6 characters long"
-        },
-        "NULL_CALL_RETURN": {
-            "error": 406,
-            "message": "expected contract call to return value, received null"
-        },
-        "NULL_RESPONSE": {
-            "error": 407,
-            "message": "expected transaction hash from Ethereum node, received null"
-        },
-        "NO_RESPONSE": {
-            "error": 408,
-            "message": "no response"
-        },
-        "INVALID_RESPONSE": {
-            "error": 409,
-            "message": "could not parse response from Ethereum node"
-        },
-        "LOCAL_NODE_FAILURE": {
-            "error": 410,
-            "message": "RPC request to local Ethereum node failed"
-        },
-        "HOSTED_NODE_FAILURE": {
-            "error": 411,
-            "message": "RPC request to hosted nodes failed"
-        },
-        "HANDLE_TAKEN": {
-            "error": 422,
-            "message": "handle already taken"
-        },
-        "FILTER_NOT_CREATED": {
-            "error": 450,
-            "message": "filter could not be created"
-        },
-        "TRANSACTION_FAILED": {
-            "error": 500,
-            "message": "transaction failed"
-        },
-        "TRANSACTION_NOT_CONFIRMED": {
-            "error": 501,
-            "message": "polled network but could not confirm transaction"
-        },
-        "DUPLICATE_TRANSACTION": {
-            "error": 502,
-            "message": "duplicate transaction"
-        },
-        "RAW_TRANSACTION_ERROR": {
-            "error": 503,
-            "message": "error sending client-side transaction"
-        },
-        "RLP_ENCODING_ERROR": {
-            "error": 504,
-            "message": "RLP encoding error"
-        },
-        "NO_MARKET_INFO": {
-            "error": 505,
-            "message": "could not retrieve market data"
-        },
-        "IPFS_ADD_FAILURE": {
-            "error": 506,
-            "message": "files could not be added to IPFS"
-        },
-        "IPFS_GET_FAILURE": {
-            "error": 507,
-            "message": "could not retrieve file from IPFS"
-        },
-        "RPC_TIMEOUT": {
-            "error": 599,
-            "message": "timed out while waiting for Ethereum network response"
-        },
-        "LOOPBACK_NOT_FOUND": {
-            "error": 650,
-            "message": "loopback interface required for synchronous local commands"
-        },
-        "ETHEREUM_NOT_FOUND": {
-            "error": 651,
-            "message": "no active ethereum node(s) found"
-        },
-        "ROOT_NOT_FOUND": {
-            "error": 700,
-            "message": "no LS-LMSR objectve function solution found"
-        }
-    }
-}
-},{}],8:[function(require,module,exports){
-module.exports={
-    "0x": "no response or bad input",
-    "getSimulatedBuy": {
-        "-2": "cost updating error (did you enter a valid quantity?)"
-    },
-    "getSimulatedSell": {
-        "-2": "cost updating error (did you enter a valid quantity?)"
-    },
-    "closeMarket": {
-        "0": "fail/trading not over yet/event not expired or closed already",
-        "-1": "Market has no cash anyway / already closed",
-        "-2": "0 outcome",
-        "-4": "Outcome .5 once, pushback and retry",
-        "-6": "bonded pushed forward market not ready to be resolved",
-        "-7": "event not reportable >.99"
-    },
-    "claimProceeds": {
-        "0": "reporting not done",
-        "-1": "trader doesn't exist"
-    },
-    "report": {
-        "0": "could not set reporter ballot",
-        "-1": "report length does not match number of expiring events",
-        "-2": "voting period expired",
-        "-3": "incorrect hash"
-    },
-    "submitReportHash": {
-        "0": "could not set report hash",
-        "-1": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
-        "-2": "not in hash submitting timeframe or event doesn't exist / not a valid event expiring then",
-        "-4": "already resolved",
-        "-5": ".99 market",
-        "-6": "no markets"
-    },
-    "submitReport": {
-        "-1": "has already reported",
-        "-2": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
-        "-3": "hash doesn't match",
-        "-4": "no rep",
-        "-5": "bad report",
-        "-6": "hash not low enough",
-        "-8": "invalid event",
-        "-9": "already resolved",
-        "-10": "<24 hr left in period, too late to report, able to put up readj. bonds though"
-    },
-    "checkReportValidity": {
-        "-1": "report isn't long enough",
-        "-2": "reporter doesn't exist, voting period is over, or voting period hasn't started yet"
-    },
-    "slashRep": {
-        "0": "incorrect hash",
-        "-2": "incorrect reporter ID"
-    },
-    "createSubbranch": {
-        "-1": "bad input or parent doesn't exist",
-        "-2": "no money for creation fee or branch already exists"
-    },
-    "createEvent": {
-        "-1": "we're either already past that date, branch doesn't exist, or description is bad",
-        "0": "not enough money to pay fees or event already exists",
-        "-2": "max value < min value"
-    },
-    "createMarket": {
-        "-1": "bad input or parent doesn't exist",
-        "-2": "too many events",
-        "-3": "too many outcomes",
-        "-4": "not enough money or market already exists",
-        "-5": "fee too low",
-        "-6": "duplicate events",
-        "-7": "event already expired"
-    },
-    "sendReputation": {
-        "0": "not enough reputation",
-        "-1": "Your reputation account was just created! Earn some reputation before you can send to others",
-        "-2": "Receiving address doesn't exist"
-    },
-    "buyShares": {
-        "-1": "invalid outcome or trading closed",
-        "-2": "entered a -amt of shares",
-        "-3": "not enough money / limit order too low",
-        "-4": "invalid outcome",
-        "-5": "bad commitment or no commitment",
-        "-6": "oracle only branch, no trading"
-    },
-    "sellShares": {
-        "-1": "invalid outcome, trading closed, or you haven't traded in this market",
-        "-2": "entered a -amt of shares",
-        "-3": "you own no shares / limit price too high",
-        "-5": "bad commitment or no commitment",
-        "-6": "oracle only branch, no trading"
-    },
-    "WHISPER_POST_FAILED": {
-        "error": 65,
-        "message": "could not post message to whisper"
-    },
-    "DB_DELETE_FAILED": {
-        "error": 97,
-        "message": "database delete failed"
-    },
-    "DB_WRITE_FAILED": {
-        "error": 98,
-        "message": "database write failed"
-    },
-    "DB_READ_FAILED": {
-        "error": 99,
-        "message": "database read failed"
-    },
-    "INVALID_CONTRACT_PARAMETER": {
-        "error": 400,
-        "message": "cannot send object parameter to contract"
-    },
-    "NOT_LOGGED_IN": {
-        "error": 401,
-        "message": "not logged in"
-    },
-    "PARAMETER_NUMBER_ERROR": {
-        "error": 402,
-        "message": "wrong number of parameters"
-    },
-    "BAD_CREDENTIALS": {
-        "error": 403,
-        "message": "incorrect handle or password"
-    },
-    "TRANSACTION_NOT_FOUND": {
-        "error": 404,
-        "message": "transaction not found"
-    },
-    "PASSWORD_TOO_SHORT": {
-        "error": 405,
-        "message": "password must be at least 6 characters long"
-    },
-    "NULL_CALL_RETURN": {
-        "error": 406,
-        "message": "expected contract call to return value, received null"
-    },
-    "NULL_RESPONSE": {
-        "error": 407,
-        "message": "expected transaction hash from Ethereum node, received null"
-    },
-    "NO_RESPONSE": {
-        "error": 408,
-        "message": "no response"
-    },
-    "INVALID_RESPONSE": {
-        "error": 409,
-        "message": "could not parse response from Ethereum node"
-    },
-    "LOCAL_NODE_FAILURE": {
-        "error": 410,
-        "message": "RPC request to local Ethereum node failed"
-    },
-    "HOSTED_NODE_FAILURE": {
-        "error": 411,
-        "message": "RPC request to hosted nodes failed"
-    },
-    "HANDLE_TAKEN": {
-        "error": 422,
-        "message": "handle already taken"
-    },
-    "FILTER_NOT_CREATED": {
-        "error": 450,
-        "message": "filter could not be created"
-    },
-    "TRANSACTION_FAILED": {
-        "error": 500,
-        "message": "transaction failed"
-    },
-    "TRANSACTION_NOT_CONFIRMED": {
-        "error": 501,
-        "message": "polled network but could not confirm transaction"
-    },
-    "DUPLICATE_TRANSACTION": {
-        "error": 502,
-        "message": "duplicate transaction"
-    },
-    "RAW_TRANSACTION_ERROR": {
-        "error": 503,
-        "message": "error sending client-side transaction"
-    },
-    "RLP_ENCODING_ERROR": {
-        "error": 504,
-        "message": "RLP encoding error"
-    },
-    "NO_MARKET_INFO": {
-        "error": 505,
-        "message": "could not retrieve market data"
-    },
-    "IPFS_ADD_FAILURE": {
-        "error": 506,
-        "message": "files could not be added to IPFS"
-    },
-    "IPFS_GET_FAILURE": {
-        "error": 507,
-        "message": "could not retrieve file from IPFS"
-    },
-    "RPC_TIMEOUT": {
-        "error": 599,
-        "message": "timed out while waiting for Ethereum network response"
-    },
-    "LOOPBACK_NOT_FOUND": {
-        "error": 650,
-        "message": "loopback interface required for synchronous local commands"
-    },
-    "ETHEREUM_NOT_FOUND": {
-        "error": 651,
-        "message": "no active ethereum node(s) found"
-    },
-    "ROOT_NOT_FOUND": {
-        "error": 700,
-        "message": "no LS-LMSR objectve function solution found"
-    }
-}
-
-},{}],9:[function(require,module,exports){
-var contracts = require("./contracts");
-contracts.errors = require("./errors");
-contracts.Tx = require("./tx");
-
-module.exports = contracts;
-
-},{"./contracts":7,"./errors":8,"./tx":10}],10:[function(require,module,exports){
-/**
- * Augur transactions
- */
-
-"use strict";
-
-module.exports = function (network) {
-
-    var contracts = require("./contracts")[network];
-
-    return {
-
-        // faucets.se
-        reputationFaucet: {
-            to: contracts.faucets,
-            method: "reputationFaucet",
-            signature: "i",
-            returns: "number",
-            send: true
-        },
-        cashFaucet: {
-            to: contracts.faucets,
-            method: "cashFaucet",
-            returns: "number",
-            send: true
-        },
-        fundNewAccount: {
-            to: contracts.faucets,
-            method: "fundNewAccount",
-            signature: "i",
-            returns: "address",
-            send: true
-        },
-
-        // createSingleEventMarket.se
-        createSingleEventMarket: {
-            to: contracts.createSingleEventMarket,
-            method: "createSingleEventMarket",
-            signature: "isiiiiiiii",
-            returns: "hash",
-            send: true
-        },
-
-        // cash.se
-        addCash: {
-            to: contracts.cash,
-            method: "addCash",
-            signature: "ii",
-            send: true,
-            returns: "number"
-        },
-        setCash: {
-            to: contracts.cash,
-            method: "setCash",
-            signature: "ii",
-            send: true,
-            returns: "number"
-        },
-        initiateOwner: {
-            to: contracts.cash,
-            method: "initiateOwner",
-            signature: "i",
-            send: true,
-            returns: "number"
-        },
-        getCashBalance: {
-            to: contracts.cash,
-            method: "balance",
-            signature: "i",
-            returns: "unfix"
-        },
-        balance: {
-            to: contracts.cash,
-            method: "balance",
-            signature: "i",
-            returns: "unfix"
-        },
-        sendCash: {
-            to: contracts.cash,
-            method: "send",
-            send: true,
-            signature: "ii",
-            returns: "unfix"
-        },
-        sendCashFrom: {
-            to: contracts.cash,
-            method: "sendFrom",
-            send: true,
-            signature: "iii",
-            returns: "unfix"
-        },
-        depositEther: {
-            to: contracts.cash,
-            method: "depositEther",
-            send: true,
-            returns: "number"
-        },
-        withdrawEther: {
-            to: contracts.cash,
-            method: "withdrawEther",
-            signature: "ii",
-            send: true,
-            returns: "number"
-        },
-
-        // info.se
-        getCreator: {
-            to: contracts.info,
-            method: "getCreator",
-            signature: "i",
-            returns: "address"
-        },
-        getCreationFee: {
-            to: contracts.info,
-            method: "getCreationFee",
-            signature: "i",
-            returns: "unfix"
-        },
-        getDescription: {
-            to: contracts.info,
-            method: "getDescription",
-            signature: "i",
-            returns: "string"
-        },
-        setInfo: {
-            to: contracts.info,
-            method: "setInfo",
-            signature: "isii",
-            returns: "number",
-            send: true
-        },
-
-        // redeem_interpolate.se
-        redeem_interpolate: {
-            to: contracts.redeem_interpolate,
-            method: "interpolate",
-            signature: "iiiii"
-        },
-        read_ballots: {
-            to: contracts.redeem_interpolate,
-            method: "read_ballots",
-            signature: "iiiii"
-        },
-
-        // center.se
-        center: {
-            to: contracts.center,
-            method: "center",
-            signature: "aaaaaii"
-        },
-
-        // redeem_center.se
-        redeem_center: {
-            to: contracts.redeem_center,
-            method: "center",
-            signature: "iiiii",
-            returns: "number"
-        },
-        redeem_covariance: {
-            to: contracts.redeem_center,
-            method: "covariance",
-            signature: "iiiii"
-        },
-
-        // redeem_score.se
-        redeem_blank: {
-            to: contracts.redeem_score,
-            method: "blank",
-            signature: "iiiii"
-        },
-        redeem_loadings: {
-            to: contracts.redeem_score,
-            method: "loadings",
-            signature: "iiiii",
-            returns: "number"
-        },
-
-        // score.se
-        blank: {
-            to: contracts.score,
-            method: "blank",
-            signature: "iii",
-            returns: "number[]"
-        },
-        loadings: {
-            to: contracts.score,
-            method: "loadings",
-            signature: "aaaii",
-            returns: "number[]"
-        },
-
-        // resolve.se
-        resolve: {
-            to: contracts.resolve,
-            method: "resolve",
-            signature: "aaaaaii",
-            returns: "number[]"
-        },
-
-        // redeem_resolve.se
-        redeem_resolve: {
-            to: contracts.redeem_resolve,
-            method: "resolve",
-            signature: "iiiii",
-            returns: "number"
-        },
-
-        // branches.se
-        initDefaultBranch: {
-            to: contracts.branches,
-            method: "initDefaultBranch",
-            returns: "number",
-            send: true
-        },
-        getBranches: {
-            to: contracts.branches,
-            method: "getBranches",
-            returns: "hash[]"
-        },
-        getMarketsInBranch: {
-            to: contracts.branches,
-            method: "getMarketsInBranch",
-            signature: "i",
-            returns: "hash[]"
-        },
-        getPeriodLength: {
-            to: contracts.branches,
-            method: "getPeriodLength",
-            signature: "i",
-            returns: "number"
-        },
-        getVotePeriod: {
-            to: contracts.branches,
-            method: "getVotePeriod",
-            signature: "i",
-            returns: "number"
-        },
-        getNumMarketsBranch: {
-            to: contracts.branches,
-            method: "getNumMarketsBranch",
-            signature: "i",
-            returns: "number"
-        },
-        getMinTradingFee: {
-            to: contracts.branches,
-            method: "getMinTradingFee",
-            signature: "i",
-            returns: "unfix"
-        },
-        getNumBranches: {
-            to: contracts.branches,
-            method: "getNumBranches",
-            returns: "number"
-        },
-        getBranch: {
-            to: contracts.branches,
-            method: "getBranch",
-            signature: "i",
-            returns: "hash"
-        },
-        incrementPeriod: {
-            to: contracts.branches,
-            method: "incrementPeriod",
-            signature: "i",
-            send: true,
-            returns: "number"
-        },
-        addMarket: {
-            to: contracts.branches,
-            method: "addMarket",
-            signature: "ii",
-            returns: "number",
-            send: true
-        },
-
-        // consensus.se
-        incrementPeriodAfterReporting: {
-            to: contracts.consensus,
-            method: "incrementPeriodAfterReporting",
-            signature: "i",
-            returns: "number",
-            send: true
-        },
-
-        // events.se
-        getMarkets: {
-            to: contracts.events,
-            method: "getMarkets",
-            signature: "i",
-            returns: "hash[]"
-        },
-        getReportingThreshold: {
-            to: contracts.events,
-            method: "getReportingThreshold",
-            signature: "i",
-            returns: "unfix"
-        },
-        getEventInfo: {
-            to: contracts.events,
-            method: "getEventInfo",
-            signature: "i",
-            returns: "hash[]"
-        },
-        getEventBranch: {
-            to: contracts.events,
-            method: "getEventBranch",
-            signature: "i",
-            returns: "hash"
-        },
-        getExpiration: {
-            to: contracts.events,
-            method: "getExpiration",
-            signature: "i",
-            returns: "number"
-        },
-        getOutcome: {
-            to: contracts.events,
-            method: "getOutcome",
-            signature: "i",
-            returns: "unfix"
-        },
-        getMinValue: {
-            to: contracts.events,
-            method: "getMinValue",
-            signature: "i",
-            returns: "number"
-        },
-        getMaxValue: {
-            to: contracts.events,
-            method: "getMaxValue",
-            signature: "i",
-            returns: "number"
-        },
-        getNumOutcomes: {
-            to: contracts.events,
-            method: "getNumOutcomes",
-            signature: "i",
-            returns: "number"
-        },
-        setOutcome: {
-            to: contracts.events,
-            method: "setOutcome",
-            signature: "ii",
-            returns: "number",
-            send: true
-        },
-
-        // expiringEvents.se
-        getEventIndex: {
-            to: contracts.expiringEvents,
-            method: "getEventIndex",
-            signature: "ii",
-            returns: "number"
-        },
-        getEvents: {
-            to: contracts.expiringEvents,
-            method: "getEvents",
-            signature: "ii",
-            returns: "hash[]"
-        },
-        getNumberEvents: {
-            to: contracts.expiringEvents,
-            method: "getNumberEvents",
-            signature: "ii",
-            returns: "number"
-        },
-        getEvent: {
-            to: contracts.expiringEvents,
-            method: "getEvent",
-            signature: "iii",
-            returns: "hash"
-        },
-        getTotalRepReported: {
-            to: contracts.expiringEvents,
-            method: "getTotalRepReported",
-            signature: "ii",
-            returns: "number"
-        },
-        getReporterBallot: {
-            to: contracts.expiringEvents,
-            method: "getReporterBallot",
-            signature: "iii",
-            returns: "unfix[]"
-        },
-        getReport: {
-            to: contracts.expiringEvents,
-            method: "getReport",
-            signature: "iiii",
-            returns: "unfix"
-        },
-        getReportHash: {
-            to: contracts.expiringEvents,
-            method: "getReportHash",
-            signature: "iii",
-            returns: "hash"
-        },
-        getVSize: {
-            to: contracts.expiringEvents,
-            method: "getVSize",
-            signature: "ii",
-            returns: "number"
-        },
-        getReportsFilled: {
-            to: contracts.expiringEvents,
-            method: "getReportsFilled",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getReportsMask: {
-            to: contracts.expiringEvents,
-            method: "getReportsMask",
-            signature: "ii",
-            returns: "number[]"
-        },
-        getWeightedCenteredData: {
-            to: contracts.expiringEvents,
-            method: "getWeightedCenteredData",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getCovarianceMatrixRow: {
-            to: contracts.expiringEvents,
-            method: "getCovarianceMatrixRow",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getDeflated: {
-            to: contracts.expiringEvents,
-            method: "getDeflated",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getLoadingVector: {
-            to: contracts.expiringEvents,
-            method: "getLoadingVector",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getLatent: {
-            to: contracts.expiringEvents,
-            method: "getLatent",
-            signature: "ii",
-            returns: "unfix"
-        },
-        getScores: {
-            to: contracts.expiringEvents,
-            method: "getScores",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getSetOne: {
-            to: contracts.expiringEvents,
-            method: "getSetOne",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getSetTwo: {
-            to: contracts.expiringEvents,
-            method: "getSetTwo",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        returnOld: {
-            to: contracts.expiringEvents,
-            method: "returnOld",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getNewOne: {
-            to: contracts.expiringEvents,
-            method: "getNewOne",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getNewTwo: {
-            to: contracts.expiringEvents,
-            method: "getNewTwo",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getAdjPrinComp: {
-            to: contracts.expiringEvents,
-            method: "getAdjPrinComp",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getSmoothRep: {
-            to: contracts.expiringEvents,
-            method: "getSmoothRep",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getOutcomesFinal: {
-            to: contracts.expiringEvents,
-            method: "getOutcomesFinal",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        getReporterPayouts: {
-            to: contracts.expiringEvents,
-            method: "getReporterPayouts",
-            signature: "ii",
-            returns: "unfix[]"
-        },
-        moveEventsToCurrentPeriod: {
-            to: contracts.expiringEvents,
-            method: "moveEventsToCurrentPeriod",
-            signature: "iii",
-            send: true
-        },
-        addEvent: {
-            to: contracts.expiringEvents,
-            method: "addEvent",
-            signature: "iii",
-            send: true
-        },
-        setTotalRepReported: {
-            to: contracts.expiringEvents,
-            method: "setTotalRepReported",
-            signature: "iii",
-            send: true
-        },
-        setReporterBallot: {
-            to: contracts.expiringEvents,
-            method: "setReporterBallot",
-            signature: "iiiai",
-            send: true,
-            returns: "number"
-        },
-        setVSize: {
-            to: contracts.expiringEvents,
-            method: "setVSize",
-            signature: "iii",
-            send: true
-        },
-        setReportsFilled: {
-            to: contracts.expiringEvents,
-            method: "setReportsFilled",
-            signature: "iia",
-            send: true
-        },
-        setReportsMask: {
-            to: contracts.expiringEvents,
-            method: "setReportsMask",
-            signature: "iia",
-            send: true
-        },
-        setWeightedCenteredData: {
-            to: contracts.expiringEvents,
-            method: "setWeightedCenteredData",
-            signature: "iia",
-            send: true
-        },
-        setCovarianceMatrixRow: {
-            to: contracts.expiringEvents,
-            method: "setCovarianceMatrixRow",
-            signature: "iia",
-            send: true
-        },
-        setDeflated: {
-            to: contracts.expiringEvents,
-            method: "setDeflated",
-            signature: "iia",
-            send: true
-        },
-        setLoadingVector: {
-            to: contracts.expiringEvents,
-            method: "setLoadingVector",
-            signature: "iia",
-            send: true
-        },
-        setScores: {
-            to: contracts.expiringEvents,
-            method: "setScores",
-            signature: "iia",
-            send: true
-        },
-        setSetOne: {
-            to: contracts.expiringEvents,
-            method: "setSetOne",
-            signature: "iia",
-            send: true
-        },
-        setSetTwo: {
-            to: contracts.expiringEvents,
-            method: "setSetTwo",
-            signature: "iia",
-            send: true
-        },
-        setOld: {
-            to: contracts.expiringEvents,
-            method: "setOld",
-            signature: "iia",
-            send: true
-        },
-        setNewOne: {
-            to: contracts.expiringEvents,
-            method: "setNewOne",
-            signature: "iia",
-            send: true
-        },
-        setNewTwo: {
-            to: contracts.expiringEvents,
-            method: "setNewTwo",
-            signature: "iia",
-            send: true
-        },
-        setAdjPrinComp: {
-            to: contracts.expiringEvents,
-            method: "setAdjPrinComp",
-            signature: "iia",
-            send: true
-        },
-        setSmoothRep: {
-            to: contracts.expiringEvents,
-            method: "setSmoothRep",
-            signature: "iia",
-            send: true
-        },
-        setOutcomesFinal: {
-            to: contracts.expiringEvents,
-            method: "setOutcomesFinal",
-            signature: "iia",
-            send: true
-        },
-        setReportHash: {
-            to: contracts.expiringEvents,
-            method: "setReportHash",
-            signature: "iii",
-            send: true
-        },
-        getTotalReputation: {
-            to: contracts.expiringEvents,
-            method: "getTotalReputation",
-            signature: "ii",
-            returns: "unfix"
-        },
-        setTotalReputation: {
-            to: contracts.expiringEvents,
-            method: "setTotalReputation",
-            signature: "iii",
-            returns: "number"
-        },
-        makeBallot: {
-            to: contracts.expiringEvents,
-            method: "makeBallot",
-            signature: "ii",
-            returns: "hash[]"
-        },
-
-        // markets.se
-        price: {
-            to: contracts.markets,
-            method: "price",
-            signature: "ii",
-            returns: "unfix"
-        },
-        lsLmsr: {
-            to: contracts.markets,
-            method: "lsLmsr",
-            signature: "i",
-            returns: "unfix"
-        },
-        getMarketInfo: {
-            to: contracts.markets,
-            method: "getMarketInfo",
-            signature: "i",
-            returns: "hash[]",
-            gas: 9999999999999
-        },
-        getMarketsInfo: {
-            to: contracts.markets,
-            method: "getMarketsInfo",
-            signature: "iii",
-            returns: "hash[]",
-            gas: 9999999999999
-        },
-        getMarketEvents: {
-            to: contracts.markets,
-            method: "getMarketEvents",
-            signature: "i",
-            returns: "hash[]"
-        },
-        getNumEvents: {
-            to: contracts.markets,
-            method: "getNumEvents",
-            signature: "i",
-            returns: "number"
-        },
-        getBranchID: {
-            to: contracts.markets,
-            method: "getBranchID",
-            signature: "i",
-            returns: "hash"
-        },
-        getCurrentParticipantNumber: {
-            to: contracts.markets,
-            method: "getCurrentParticipantNumber",
-            signature: "i",
-            returns: "number"
-        },
-        getMarketNumOutcomes: {
-            to: contracts.markets,
-            method: "getMarketNumOutcomes",
-            signature: "i",
-            returns: "number"
-        },
-        getParticipantSharesPurchased: {
-            to: contracts.markets,
-            method: "getParticipantSharesPurchased",
-            signature: "iii",
-            returns: "unfix"
-        },
-        getSharesPurchased: {
-            to: contracts.markets,
-            method: "getSharesPurchased",
-            signature: "ii",
-            returns: "unfix"
-        },
-        getForkSelection: {
-            to: contracts.markets,
-            method: "getForkSelection",
-            signature: "i",
-            returns: "hash"
-        },
-        getVolume: {
-            to: contracts.markets,
-            method: "getVolume",
-            signature: "i",
-            returns: "unfix"
-        },
-        getWinningOutcomes: {
-            to: contracts.markets,
-            method: "getWinningOutcomes",
-            signature: "i",
-            returns: "number[]"
-        },
-        getParticipantNumber: {
-            to: contracts.markets,
-            method: "getParticipantNumber",
-            signature: "ii",
-            returns: "number"
-        },
-        getParticipantID: {
-            to: contracts.markets,
-            method: "getParticipantID",
-            signature: "ii",
-            returns: "address"
-        },
-        getAlpha: {
-            to: contracts.markets,
-            method: "getAlpha",
-            signature: "i",
-            returns: "unfix"
-        },
-        getCumScale: {
-            to: contracts.markets,
-            method: "getCumScale",
-            signature: "i",
-            returns: "unfix"
-        },
-        getTradingPeriod: {
-            to: contracts.markets,
-            method: "getTradingPeriod",
-            signature: "i",
-            returns: "number"
-        },
-        getTradingFee: {
-            to: contracts.markets,
-            method: "getTradingFee",
-            signature: "i",
-            returns: "unfix"
-        },
-        initialLiquidityAmount: {
-            to: contracts.markets,
-            method: "initialLiquidityAmount",
-            signature: "ii",
-            returns: "unfix"
-        },
-        initialLiquiditySetup: {
-            to: contracts.markets,
-            method: "initialLiquiditySetup",
-            signature: "iiii",
-            returns: "number",
-            send: true
-        },
-        modifyShares: {
-            to: contracts.markets,
-            method: "modifyShares",
-            signature: "iii",
-            returns: "number",
-            send: true
-        },
-        initializeMarket: {
-            to: contracts.markets,
-            method: "initializeMarket",
-            signature: "iaiii",
-            returns: "number",
-            send: true
-        },
-
-        // reporting.se
-        getRepBalance: {
-            to: contracts.reporting,
-            method: "getRepBalance",
-            signature: "ii",
-            returns: "unfix"
-        },
-        getRepByIndex: {
-            to: contracts.reporting,
-            method: "getRepByIndex",
-            signature: "ii",
-            returns: "unfix"
-        },
-        getReporterID: {
-            to: contracts.reporting,
-            method: "getReporterID",
-            signature: "ii",
-            returns: "address"
-        },
-        getReputation: {
-            to: contracts.reporting,
-            method: "getReputation",
-            signature: "i",
-            returns: "number[]"
-        },
-        getNumberReporters: {
-            to: contracts.reporting,
-            method: "getNumberReporters",
-            signature: "i",
-            returns: "number"
-        },
-        repIDToIndex: {
-            to: contracts.reporting,
-            method: "repIDToIndex",
-            signature: "ii",
-            returns: "number"
-        },
-        getTotalRep: {
-            to: contracts.reporting,
-            method: "getTotalRep",
-            signature: "i",
-            returns: "unfix"
-        },
-        hashReport: {
-            to: contracts.reporting,
-            method: "hashReport",
-            signature: "ai"
-        },
-
-        // buy&sellShares.se
-        commitTrade: {
-            to: contracts.buyAndSellShares,
-            method: "commitTrade",
-            signature: "ii",
-            returns: "number",
-            send: true
-        },
-        buyShares: {
-            to: contracts.buyAndSellShares,
-            method: "buyShares",
-            signature: "iiiii",
-            returns: "number",
-            send: true
-        },
-        sellShares: {
-            to: contracts.buyAndSellShares,
-            method: "sellShares",
-            signature: "iiiii",
-            returns: "number",
-            send: true
-        },
-
-        // createBranch.se
-        createSubbranch: {
-            to: contracts.createBranch,
-            method: "createSubbranch",
-            signature: "siiii",
-            returns: "hash",
-            send: true
-        },
-
-        // sendReputation.se
-        sendReputation: {
-            to: contracts.sendReputation,
-            method: "sendReputation",
-            signature: "iii",
-            send: true,
-            returns: "unfix"
-        },
-
-        // makeReports.se
-        makeHash: {
-            to: contracts.makeReports,
-            method: "makeHash",
-            signature: "iii",
-            returns: "hash"
-        },
-        report: {
-            to: contracts.makeReports,
-            method: "report",
-            signature: "iaii",
-            returns: "number",
-            send: true
-        },
-        calculateReportingThreshold: {
-            to: contracts.makeReports,
-            method: "calculateReportingThreshold",
-            signature: "iii",
-            returns: "hash"
-        },
-        submitReportHash: {
-            to: contracts.makeReports,
-            method: "submitReportHash",
-            signature: "iiiii",
-            returns: "number",
-            send: true
-        },
-        submitReport: {
-            to: contracts.makeReports,
-            method: "submitReport",
-            signature: "iiiiiii",
-            returns: "number",
-            send: true
-        },
-        checkReportValidity: {
-            to: contracts.makeReports,
-            method: "checkReportValidity",
-            signature: "iai",
-            returns: "number"
-        },
-        slashRep: {
-            to: contracts.makeReports,
-            method: "slashRep",
-            signature: "iiiai",
-            returns: "number",
-            send: true
-        },
-
-        // createEvent.se
-        createEvent: {
-            to: contracts.createEvent,
-            method: "createEvent",
-            signature: "isiiii",
-            send: true
-        },
-
-        // createMarket.se
-        createMarket: {
-            to: contracts.createMarket,
-            method: "createMarket",
-            signature: "isiiiai",
-            send: true
-        },
-
-        // closeMarket.se
-        closeMarket: {
-            to: contracts.closeMarket,
-            method: "closeMarket",
-            signature: "ii",
-            returns: "number",
-            send: true
-        },
-        claimProceeds: {
-            to: contracts.closeMarket,
-            method: "claimProceeds",
-            signature: "ii",
-            returns: "number",
-            send: true
-        },
-
-        // dispatch.se
-        dispatch: {
-            to: contracts.dispatch,
-            method: "dispatch",
-            signature: "i",
-            returns: "number"
-        }
-    };
-
-};
-
-},{"./contracts":7}],11:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 },{}],12:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -37503,7 +37343,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"_process":229,"async":3,"augur-contracts":265,"ethrpc":267}],263:[function(require,module,exports){
+},{"_process":229,"async":7,"augur-contracts":265,"ethrpc":267}],263:[function(require,module,exports){
 module.exports={
     "2": {
         "buyAndSellShares": "0xf5210713da9674da9f693713c00e79bcc3e79bc9",
@@ -37800,10 +37640,222 @@ module.exports={
     }
 }
 },{}],264:[function(require,module,exports){
-arguments[4][8][0].apply(exports,arguments)
-},{"dup":8}],265:[function(require,module,exports){
-arguments[4][9][0].apply(exports,arguments)
-},{"./contracts":263,"./errors":264,"./tx":266,"dup":9}],266:[function(require,module,exports){
+module.exports={
+    "0x": "no response or bad input",
+    "getSimulatedBuy": {
+        "-2": "cost updating error (did you enter a valid quantity?)"
+    },
+    "getSimulatedSell": {
+        "-2": "cost updating error (did you enter a valid quantity?)"
+    },
+    "closeMarket": {
+        "0": "fail/trading not over yet/event not expired or closed already",
+        "-1": "Market has no cash anyway / already closed",
+        "-2": "0 outcome",
+        "-4": "Outcome .5 once, pushback and retry",
+        "-6": "bonded pushed forward market not ready to be resolved",
+        "-7": "event not reportable >.99"
+    },
+    "claimProceeds": {
+        "0": "reporting not done",
+        "-1": "trader doesn't exist"
+    },
+    "report": {
+        "0": "could not set reporter ballot",
+        "-1": "report length does not match number of expiring events",
+        "-2": "voting period expired",
+        "-3": "incorrect hash"
+    },
+    "submitReportHash": {
+        "0": "could not set report hash",
+        "-1": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
+        "-2": "not in hash submitting timeframe or event doesn't exist / not a valid event expiring then",
+        "-4": "already resolved",
+        "-5": ".99 market",
+        "-6": "no markets"
+    },
+    "submitReport": {
+        "-1": "has already reported",
+        "-2": "reporter (you) doesn't (don't) exist, or voting period over or hasn't started yet",
+        "-3": "hash doesn't match",
+        "-4": "no rep",
+        "-5": "bad report",
+        "-6": "hash not low enough",
+        "-8": "invalid event",
+        "-9": "already resolved",
+        "-10": "<24 hr left in period, too late to report, able to put up readj. bonds though"
+    },
+    "checkReportValidity": {
+        "-1": "report isn't long enough",
+        "-2": "reporter doesn't exist, voting period is over, or voting period hasn't started yet"
+    },
+    "slashRep": {
+        "0": "incorrect hash",
+        "-2": "incorrect reporter ID"
+    },
+    "createSubbranch": {
+        "-1": "bad input or parent doesn't exist",
+        "-2": "no money for creation fee or branch already exists"
+    },
+    "createEvent": {
+        "-1": "we're either already past that date, branch doesn't exist, or description is bad",
+        "0": "not enough money to pay fees or event already exists",
+        "-2": "max value < min value"
+    },
+    "createMarket": {
+        "-1": "bad input or parent doesn't exist",
+        "-2": "too many events",
+        "-3": "too many outcomes",
+        "-4": "not enough money or market already exists",
+        "-5": "fee too low",
+        "-6": "duplicate events",
+        "-7": "event already expired"
+    },
+    "sendReputation": {
+        "0": "not enough reputation",
+        "-1": "Your reputation account was just created! Earn some reputation before you can send to others",
+        "-2": "Receiving address doesn't exist"
+    },
+    "buyShares": {
+        "-1": "invalid outcome or trading closed",
+        "-2": "entered a -amt of shares",
+        "-3": "not enough money / limit order too low",
+        "-4": "invalid outcome",
+        "-5": "bad commitment or no commitment",
+        "-6": "oracle only branch, no trading"
+    },
+    "sellShares": {
+        "-1": "invalid outcome, trading closed, or you haven't traded in this market",
+        "-2": "entered a -amt of shares",
+        "-3": "you own no shares / limit price too high",
+        "-5": "bad commitment or no commitment",
+        "-6": "oracle only branch, no trading"
+    },
+    "WHISPER_POST_FAILED": {
+        "error": 65,
+        "message": "could not post message to whisper"
+    },
+    "DB_DELETE_FAILED": {
+        "error": 97,
+        "message": "database delete failed"
+    },
+    "DB_WRITE_FAILED": {
+        "error": 98,
+        "message": "database write failed"
+    },
+    "DB_READ_FAILED": {
+        "error": 99,
+        "message": "database read failed"
+    },
+    "INVALID_CONTRACT_PARAMETER": {
+        "error": 400,
+        "message": "cannot send object parameter to contract"
+    },
+    "NOT_LOGGED_IN": {
+        "error": 401,
+        "message": "not logged in"
+    },
+    "PARAMETER_NUMBER_ERROR": {
+        "error": 402,
+        "message": "wrong number of parameters"
+    },
+    "BAD_CREDENTIALS": {
+        "error": 403,
+        "message": "incorrect handle or password"
+    },
+    "TRANSACTION_NOT_FOUND": {
+        "error": 404,
+        "message": "transaction not found"
+    },
+    "PASSWORD_TOO_SHORT": {
+        "error": 405,
+        "message": "password must be at least 6 characters long"
+    },
+    "NULL_CALL_RETURN": {
+        "error": 406,
+        "message": "expected contract call to return value, received null"
+    },
+    "NULL_RESPONSE": {
+        "error": 407,
+        "message": "expected transaction hash from Ethereum node, received null"
+    },
+    "NO_RESPONSE": {
+        "error": 408,
+        "message": "no response"
+    },
+    "INVALID_RESPONSE": {
+        "error": 409,
+        "message": "could not parse response from Ethereum node"
+    },
+    "LOCAL_NODE_FAILURE": {
+        "error": 410,
+        "message": "RPC request to local Ethereum node failed"
+    },
+    "HOSTED_NODE_FAILURE": {
+        "error": 411,
+        "message": "RPC request to hosted nodes failed"
+    },
+    "HANDLE_TAKEN": {
+        "error": 422,
+        "message": "handle already taken"
+    },
+    "FILTER_NOT_CREATED": {
+        "error": 450,
+        "message": "filter could not be created"
+    },
+    "TRANSACTION_FAILED": {
+        "error": 500,
+        "message": "transaction failed"
+    },
+    "TRANSACTION_NOT_CONFIRMED": {
+        "error": 501,
+        "message": "polled network but could not confirm transaction"
+    },
+    "DUPLICATE_TRANSACTION": {
+        "error": 502,
+        "message": "duplicate transaction"
+    },
+    "RAW_TRANSACTION_ERROR": {
+        "error": 503,
+        "message": "error sending client-side transaction"
+    },
+    "RLP_ENCODING_ERROR": {
+        "error": 504,
+        "message": "RLP encoding error"
+    },
+    "NO_MARKET_INFO": {
+        "error": 505,
+        "message": "could not retrieve market data"
+    },
+    "IPFS_ADD_FAILURE": {
+        "error": 506,
+        "message": "files could not be added to IPFS"
+    },
+    "IPFS_GET_FAILURE": {
+        "error": 507,
+        "message": "could not retrieve file from IPFS"
+    },
+    "RPC_TIMEOUT": {
+        "error": 599,
+        "message": "timed out while waiting for Ethereum network response"
+    },
+    "LOOPBACK_NOT_FOUND": {
+        "error": 650,
+        "message": "loopback interface required for synchronous local commands"
+    },
+    "ETHEREUM_NOT_FOUND": {
+        "error": 651,
+        "message": "no active ethereum node(s) found"
+    },
+    "ROOT_NOT_FOUND": {
+        "error": 700,
+        "message": "no LS-LMSR objectve function solution found"
+    }
+}
+
+},{}],265:[function(require,module,exports){
+arguments[4][3][0].apply(exports,arguments)
+},{"./contracts":263,"./errors":264,"./tx":266,"dup":3}],266:[function(require,module,exports){
 /**
  * Augur transactions
  */
@@ -40163,17 +40215,17 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"_process":229,"async":3,"augur-abi":4,"augur-contracts":270,"bignumber.js":272,"browser-request":273,"net":11,"request":274,"sync-request":13}],268:[function(require,module,exports){
+},{"_process":229,"async":7,"augur-abi":8,"augur-contracts":270,"bignumber.js":272,"browser-request":273,"net":11,"request":274,"sync-request":13}],268:[function(require,module,exports){
 arguments[4][263][0].apply(exports,arguments)
 },{"dup":263}],269:[function(require,module,exports){
-arguments[4][8][0].apply(exports,arguments)
-},{"dup":8}],270:[function(require,module,exports){
-arguments[4][9][0].apply(exports,arguments)
-},{"./contracts":268,"./errors":269,"./tx":271,"dup":9}],271:[function(require,module,exports){
+arguments[4][264][0].apply(exports,arguments)
+},{"dup":264}],270:[function(require,module,exports){
+arguments[4][3][0].apply(exports,arguments)
+},{"./contracts":268,"./errors":269,"./tx":271,"dup":3}],271:[function(require,module,exports){
 arguments[4][266][0].apply(exports,arguments)
 },{"./contracts":268,"dup":266}],272:[function(require,module,exports){
-arguments[4][5][0].apply(exports,arguments)
-},{"dup":5}],273:[function(require,module,exports){
+arguments[4][9][0].apply(exports,arguments)
+},{"dup":9}],273:[function(require,module,exports){
 // Browser Request
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -70325,4 +70377,4 @@ module.exports = function base (ALPHABET) {
   }
 }
 
-},{}]},{},[1]);
+},{}]},{},[5]);

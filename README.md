@@ -5,7 +5,7 @@ Ramble
 [![Coverage Status](https://coveralls.io/repos/AugurProject/ramble/badge.svg?branch=master&service=github)](https://coveralls.io/github/AugurProject/ramble?branch=master)
 [![npm version](https://badge.fury.io/js/ramble.svg)](http://badge.fury.io/js/ramble)
 
-Basic decentralized comments and metadata.  Uses an Ethereum contract for lookups and IPFS for distributed data storage.
+Ramble is an IPFS/Ethereum adapter.  It is set up to handle basic decentralized comments and metadata.  It uses an Ethereum contract for lookups and IPFS for distributed data storage.
 
 Usage
 -----
