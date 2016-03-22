@@ -79,7 +79,7 @@ module.exports = {
             return this.rpc.broadcast(this.rpc.marshal("getLogs", filter), f);
         }
         // TODO stop the terribadness and move this stuff to ethrpc
-        var rpcUrl = "http://testnet.etherscan.io/api?module=proxy&action=eth_getLogs&" + Object.keys(filter).map(function (k) {
+        var rpcUrl = this.rpc.etherscanApi + "&action=eth_getLogs&" + Object.keys(filter).map(function (k) {
             return encodeURIComponent(k) + '=' + encodeURIComponent(filter[k]);
         }).join('&');
         request({method: "GET", url: rpcUrl}, function (e, response, body) {
