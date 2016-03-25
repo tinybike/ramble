@@ -1,6 +1,6 @@
 {
   "name": "ramble",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "IPFS/Ethereum adapter",
   "main": "index.js",
   "scripts": {
@@ -31,12 +31,10 @@
     "async": "^1.5.1",
     "augur-abi": "^0.2.7",
     "augur-contracts": "AugurProject/augur-contracts",
-    "browser-request": "^0.3.3",
-    "ethereumjs-connect": "^0.1.7",
-    "ethrpc": "^0.5.7",
+    "ethereumjs-connect": "^0.1.8",
+    "ethrpc": "^0.5.8",
     "ipfs-api": "^2.13.1",
-    "multi-hash": "^0.1.1",
-    "request": "^2.69.0"
+    "multi-hash": "^0.1.1"
   },
   "browser": {
     "ipfs-api": false

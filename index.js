@@ -12,7 +12,6 @@ var connector = require("ethereumjs-connect");
 var multihash = require("multi-hash");
 var abi = require("augur-abi");
 var rpc = require("ethrpc");
-var request = (NODE_JS) ? require("request") : require("browser-request");
 var errors = require("augur-contracts").errors;
 var ipfsAPI;
 if (global) {
@@ -74,23 +73,7 @@ module.exports = {
     localNode: (REMOTE) ? null : constants.IPFS_LOCAL,
 
     getLogs: function (filter, f) {
-        var self = this;
-        if (!this.rpc.etherscan || !f) {
-            return this.rpc.broadcast(this.rpc.marshal("getLogs", filter), f);
-        }
-        // TODO stop the terribadness and move this stuff to ethrpc
-        var rpcUrl = this.rpc.etherscanApi + "&action=eth_getLogs&" + Object.keys(filter).map(function (k) {
-            return encodeURIComponent(k) + '=' + encodeURIComponent(filter[k]);
-        }).join('&');
-        request({method: "GET", url: rpcUrl}, function (e, response, body) {
-            if (e) {
-                console.error("etherscan getLogs error:", e);
-                self.rpc.etherscan = false;
-                f(e);
-            } else if (response.statusCode === 200) {
-                self.rpc.parse(body, null, f);
-            }
-        });
+        return this.rpc.broadcast(this.rpc.marshal("getLogs", filter), f);
     },
 
     useLocalNode: function (url) {
