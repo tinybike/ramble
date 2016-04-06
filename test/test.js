@@ -5,8 +5,6 @@
 
 "use strict";
 
-var fs = require("fs");
-var join = require("path").join;
 var assert = require("chai").assert;
 var abi = require("augur-abi");
 var augur = require("augur.js");
@@ -26,7 +24,6 @@ describe("Metadata", function () {
 
     var metadata = {
         marketId: market,
-        image: fs.readFileSync(join(__dirname, "lena.png")),
         details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         tags: ["latin", "lorem ipsum"],
         source: "Reality Keys",
@@ -80,7 +77,6 @@ describe("Metadata", function () {
             assert.isNull(err);
             assert.isObject(data);
             assert.strictEqual(data.marketId, metadata.marketId);
-            assert.strictEqual(data.image.toString("hex"), metadata.image.toString("hex"));
             assert.strictEqual(data.details, metadata.details);
             assert.deepEqual(data.links, metadata.links);
             assert.deepEqual(data.tags, metadata.tags);
@@ -96,16 +92,9 @@ describe("Metadata", function () {
             assert.isObject(marketMetadata);
             assert.property(marketMetadata, "source");
             assert.property(marketMetadata, "marketId");
-            assert.property(marketMetadata, "image");
             assert.property(marketMetadata, "details");
             assert.property(marketMetadata, "links");
             assert.property(marketMetadata, "tags");
-            assert.strictEqual(marketMetadata.source, metadata.source);
-            assert.strictEqual(marketMetadata.marketId, metadata.marketId);
-            assert.strictEqual(marketMetadata.image.toString("hex"), metadata.image.toString("hex"));
-            assert.strictEqual(marketMetadata.details, metadata.details);
-            assert.deepEqual(marketMetadata.links, metadata.links);
-            assert.deepEqual(marketMetadata.tags, metadata.tags);
             done();
         });
     });
@@ -115,7 +104,7 @@ describe("Comments", function () {
     var markets, numMarkets, market, comment, ipfsHash, ipfsData;
 
     augur.connect();
-    markets = augur.getMarkets(augur.branches.dev);
+    markets = augur.getMarketsInBranch(augur.branches.dev);
     numMarkets = markets.length;
     market = markets[numMarkets - 1];
     if (numMarkets > 10) {
