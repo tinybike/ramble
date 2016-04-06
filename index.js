@@ -238,7 +238,7 @@ module.exports = {
                 fromBlock: options.fromBlock || "0x1",
                 toBlock: options.toBlock || "latest",
                 address: this.connector.contracts.ramble,
-                topics: ["comment"]
+                topics: [this.rpc.sha3("comment")]
             }, function (logs) {
                 if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
                     return cb(errors.IPFS_GET_FAILURE);
@@ -292,7 +292,7 @@ module.exports = {
                 fromBlock: options.fromBlock || "0x1",
                 toBlock: options.toBlock || "latest",
                 address: this.connector.contracts.ramble,
-                topics: ["metadata"]
+                topics: [this.rpc.sha3("metadata")]
             }, function (logs) {
                 if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
                     return cb(errors.IPFS_GET_FAILURE);

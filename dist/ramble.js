@@ -1005,14 +1005,14 @@ module.exports = function (network) {
             method: "getMarketInfo",
             signature: "i",
             returns: "hash[]",
-            gas: 9999999999999
+            gas: "0x9184e729fff"
         },
         getMarketsInfo: {
             to: contracts.markets,
             method: "getMarketsInfo",
             signature: "iii",
             returns: "hash[]",
-            gas: 9999999999999
+            gas: "0x9184e729fff"
         },
         getMarketEvents: {
             to: contracts.markets,
@@ -1300,13 +1300,6 @@ module.exports = function (network) {
             signature: "iii",
             returns: "hash"
         },
-        report: {
-            to: contracts.makeReports,
-            method: "report",
-            signature: "iaii",
-            returns: "number",
-            send: true
-        },
         calculateReportingThreshold: {
             to: contracts.makeReports,
             method: "calculateReportingThreshold",
@@ -1330,7 +1323,7 @@ module.exports = function (network) {
         checkReportValidity: {
             to: contracts.makeReports,
             method: "checkReportValidity",
-            signature: "iai",
+            signature: "iii",
             returns: "number"
         },
 
@@ -1625,7 +1618,7 @@ module.exports = {
                 fromBlock: options.fromBlock || "0x1",
                 toBlock: options.toBlock || "latest",
                 address: this.connector.contracts.ramble,
-                topics: ["comment"]
+                topics: [this.rpc.sha3("comment")]
             }, function (logs) {
                 if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
                     return cb(errors.IPFS_GET_FAILURE);
@@ -1679,7 +1672,7 @@ module.exports = {
                 fromBlock: options.fromBlock || "0x1",
                 toBlock: options.toBlock || "latest",
                 address: this.connector.contracts.ramble,
-                topics: ["metadata"]
+                topics: [this.rpc.sha3("metadata")]
             }, function (logs) {
                 if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
                     return cb(errors.IPFS_GET_FAILURE);
