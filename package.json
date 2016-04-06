@@ -37,7 +37,7 @@
     "ipfs-api": false
   },
   "devDependencies": {
-    "augur.js": "^0.18.9",
+    "augur.js": "^0.18.10",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
     "coveralls": "^2.11.6",
